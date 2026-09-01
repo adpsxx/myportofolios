@@ -1,5 +1,5 @@
-Nama : Andranu Dhawy Purditya
+Nama: Andranu Dhawy Purditya
 
-NPM : 2506584893
+NPM: 2506584893
 
-Kelas : PBP D
+Kelas: PBP D
