@@ -205,4 +205,29 @@ h1, .brand {
     .social-links {
         justify-content: flex-start;
     }
+
+    .bio {
+        text-align: center;
+        margin-top: 20px
+    }
+
+    .hero-kicker {
+        text-align: center;
+    }
+
+    .meta-list, .social-links {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-identity > h1 {
+        text-align: center;
+    }
+
+    .hero-photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
 }
