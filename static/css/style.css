@@ -189,6 +189,18 @@ h1, .brand {
     border-top: 1px solid var(--line);
 }
 
+
+.skill-text {
+    font-weight: bold;
+}
+
+.hero-skill-list {
+    list-style-type: none;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+
 @media (max-width: 600px) {
     .hero-grid {
         grid-template-columns: 1fr;
@@ -208,7 +220,7 @@ h1, .brand {
 
     .bio {
         text-align: center;
-        margin-top: 20px
+        margin-top: 20px;        
     }
 
     .hero-kicker {
