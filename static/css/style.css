@@ -192,14 +192,37 @@ h1, .brand {
 
 .skill-text {
     font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
 }
 
 .hero-skill-list {
     list-style-type: none;
-    margin-bottom: 20px;
+    padding-left: 0;       
+    margin-bottom: 1.5rem;
     font-weight: 400;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--ink);
 }
 
+/* Navbar CSS styles */
+#navbar {
+  background-color: var(--footer-header) !important;
+}
+
+#navbar .navbar-brand{
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+#navbar .navbar-link{
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
 
 @media (max-width: 600px) {
     .hero-grid {
