@@ -242,4 +242,8 @@ h1, .brand {
         align-items: center;
         margin: auto;
     }
+
+    .hero-skill {
+        text-align: center;
+    }
 }
