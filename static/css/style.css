@@ -151,7 +151,15 @@ h1, .brand {
 }
 
 .social-link:hover {
-    background-color: var(--accent);
+    background-color: #de3733;
+}
+
+.social-link#github-btn:hover {
+    background-color: #672c93;
+}
+
+.social-link#linkedin-btn:hover {
+    background-color: #0a66c2;
 }
 
 .hero-photo {
