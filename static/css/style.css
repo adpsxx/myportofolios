@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/*Color and theme for website*/
 :root {
     --ink: #1c1917;
     --footer-header: #E5DED4;
@@ -22,57 +23,24 @@ body {
     line-height: 1.6;
 }
 
-.site-header {
-    background-color: var(--footer-header);
-}
-
+/*Background color for footer*/
 .site-footer {
     background-color: var(--footer-header);
 }
 
-#top:hover {
-    color: darkgray;
-}
-
-h1, .brand {
+/*Font for name*/
+h1 {
     font-family: "Space Grotesk", -apple-system, sans-serif;
 }
 
+/*Container*/
 .container {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
-.site-header {
-    border-bottom: 1px solid var(--line);
-}
-
-.site-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-}
-
-.brand {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--ink);
-    text-decoration: none;
-}
-
-.site-header nav {
-    display: flex;
-    gap: 2rem;
-}
-
-.site-header nav a {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
+/*Main Section*/
 .hero {
     padding: 4.5rem 0 5rem;
 }
@@ -197,7 +165,6 @@ h1, .brand {
     border-top: 1px solid var(--line);
 }
 
-
 .skill-text {
     font-weight: bold;
     font-size: 0.85rem;
@@ -224,6 +191,7 @@ h1, .brand {
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 1.9rem;
     font-weight: 700;
+    color: var(--ink);
 }
 
 #navbar .navbar-link{
@@ -232,6 +200,8 @@ h1, .brand {
     font-weight: 500;
 }
 
+/*Mobile view*/
+/*Make every element goes to the center*/
 @media (max-width: 600px) {
     .hero-grid {
         grid-template-columns: 1fr;
