@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andranu - Portfolio</title>
+    <title>{{ name }} - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -14,13 +14,14 @@
 <body>
     <nav class="navbar navbar-expand-md ps-5 py-3" id="navbar">
         <div class="container-fluid align-items-center gap-5">
-            <a class="navbar-brand align-items-baseline" href="#">Andranu</a>
+            <a class="navbar-brand align-items-baseline" href="#">{{name}}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg> Profile</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'main:show_main' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/></svg> Profile</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'main:show_experience' %}"> Experience</a>
                 </div>
             </div>
         </div>
@@ -31,14 +32,14 @@
             <div class="container hero-grid">
                 <div class="hero-identity">
                     <p class="hero-kicker">Computer Science &middot; Universitas Indonesia</p>
-                    <h1>Andranu Dhawy Purditya</h1>
+                    <h1>{{full_name}}</h1>
                 </div>
                 <div class="hero-photo">
                     <div class="photo-block"></div>
-                    <img class="avatar" src="/static/img/andranu-pic.jpg" alt="Photo of Andranu">
+                    <img class="avatar" src="/static/img/andranu-pic.jpg" alt="Photo of {{name}}">
                 </div>
                 <div class="hero-details">
-                    <p class="bio">Second-year CS student at Universitas Indonesia. Have a deep interest in Artificial Intelligence and Internet of Things.</p>
+                    <p class="bio">{{bio}}</p>
                     <div class="hero-skill">
                         <p class="skill-text">Focus Areas</p>
                         <ul class = "hero-skill-list">
@@ -50,11 +51,11 @@
                     <dl class="meta-list">
                         <div class="meta-row">
                             <dt>NPM</dt>
-                            <dd>2506584893</dd>
+                            <dd>{{npm}}</dd>
                         </div>
                         <div class="meta-row">
                             <dt>Program</dt>
-                            <dd>S1 Ilmu Komputer</dd>
+                            <dd>{{study_program}}</dd>
                         </div>
                     </dl>
                     <div class="social-links">
@@ -69,7 +70,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Andranu. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
 </body>
