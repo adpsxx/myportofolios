@@ -29,28 +29,21 @@
     </nav>
 
     <main>
-        <section class="experience-section" id="experience">
+        <section class="project-section" id="project">
             <div class="container">
                 <p class="section-kicker">Proyek saya sejauh ini</p>
                 <h1>Project</h1>
 
-                <div class="experience-grid">
+                <div class="project-grid">
                     {% for project in project_list %}
-                        <article class="experience-card">
-                            <span class="experience-category">
-                                {{ project.get_category_display }}
-                            </span>
-                            <h2>{{ project.title }}</h2>
-                            <p class="experience-description">
-                                {{ project.description }}
-                            </p>
-
-                            {% if project.is_ongoing %}
-                                <p class="experience-status">Sedang berlangsung</p>
-                            {% else %}
-                                <p class="project-status">Selesai</p>
-                            {% endif %}
-                        </article>
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ project.thumbnail }}" alt="{{ project.title }} image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.title }}</h5>
+                                <p class="card-text">{{ project.description }}</p>
+                                <a href="{{ project.project_link }}" class="btn btn-primary">Link</a>
+                            </div>
+                        </div>
                     {% empty %}
                         <p class="empty-state">
                             Belum ada projek yang ditambahkan.

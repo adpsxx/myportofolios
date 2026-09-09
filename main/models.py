@@ -33,7 +33,7 @@ class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    thumbnail = models.URLField(blank=True, null=True)
+    thumbnail = models.URLField(default="https://ik.imagekit.io/hefciv25h/portfolio/placeholder.jpg")
     project_link = models.URLField(blank=True, null=True)
     
     def __str__(self):
