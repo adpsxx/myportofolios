@@ -258,6 +258,13 @@ h1 {
 }
 
 /*Project section*/
+/*Project title*/
+.project-section h1 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
 /* Grid for project*/
 .project-grid {
     display: grid;
@@ -343,6 +350,16 @@ h1 {
     }
 
     .hero-skill {
+        text-align: center;
+    }
+
+    /*Make every card on the center of the screen for mobile view*/
+    .project-grid {
+        justify-items: center;
+    }
+
+    /*Center the title*/
+    .container-project > p, .container-project > h1 {
         text-align: center;
     }
 }
