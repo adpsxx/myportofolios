@@ -220,6 +220,7 @@ h1 {
     font-size: 2rem;
 }
 
+/* Grid for experience*/
 .experience-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -254,6 +255,54 @@ h1 {
     margin-top: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
+}
+
+/*Project section*/
+/*Project title*/
+.project-section h1 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Grid for project*/
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+/*Formatting project card content using flexbox*/
+.project-section .card {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Formatting project card content using flexbox*/
+.project-section .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/*Wrapping container for project*/
+.project-section {
+    padding: 4rem 0;
+    border-top: 1px solid var(--line);
+}
+
+/*Styling image inside card for each project*/
+.project-section .card-img-top {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+/*Make the link button alawys on the bottom left*/
+.project-section .btn-primary {
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 /*Mobile view*/
@@ -301,6 +350,16 @@ h1 {
     }
 
     .hero-skill {
+        text-align: center;
+    }
+
+    /*Make every card on the center of the screen for mobile view*/
+    .project-grid {
+        justify-items: center;
+    }
+
+    /*Center the title*/
+    .container-project > p, .container-project > h1 {
         text-align: center;
     }
 }
