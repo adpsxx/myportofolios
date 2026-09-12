@@ -265,6 +265,19 @@ h1 {
     gap: 1rem;
 }
 
+/*Formatting project card content using flexbox*/
+.project-section .card {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Formatting project card content using flexbox*/
+.project-section .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 /*Wrapping container for project*/
 .project-section {
     padding: 4rem 0;
@@ -272,11 +285,17 @@ h1 {
 }
 
 /*Styling image inside card for each project*/
-.card-img-top {
+.project-section .card-img-top {
     display: block;
     width: 100%;
     height: 240px;
     object-fit: cover;
+}
+
+/*Make the link button alawys on the bottom left*/
+.project-section .btn-primary {
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 /*Mobile view*/
