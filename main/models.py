@@ -34,7 +34,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     thumbnail = models.URLField(default="https://ik.imagekit.io/hefciv25h/portfolio/placeholder.jpg")
-    project_link = models.URLField(blank=True, null=True)
+    project_link = models.URLField(default="https://github.com/adpsxx")
     
     def __str__(self):
         return self.title
