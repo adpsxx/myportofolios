@@ -24,3 +24,25 @@ Saya juga menggunakan AI untuk meminta inspirasi untuk desain website saya.
 
 chat log:
 https://share.gemini.google/kjSPSM4bpVzj
+
+### Tugas 2
+1. Saat pengguna membuka tampilan halaman portofolio, pengguna mengetik URL dari web portofolio, yang kemudian mengirimkan request ke server. Pada proyek, urls.py menerima request tersebut, membaca URL, lalu mencocokannya untuk diteruskan menuju urls.py pada aplikasi. Setelah itu, urls.py pada aplikasi akan mencocokkan URL tersebut kembali untuk diteruskan dengan tampilan sesuai dengan URL yang diberikan. Komponen view yang berada sesuai dengan alamat URL tersebut akan mengambil data dari model. Data yang sudah terkumpul oleh model kemudian akan diteruskan pada view yang kemudian akan diteruskan pada template. Template menggabungkan struktur HTML dengan data tersebut lalu membentuk struktur visual yang akan ditampilkan. Template lalu dikirimkan kembali oleh server kepada pengguna sehingga pengguna dapat melihat tampilan web yang sudah jadi.
+
+2. Penyimpanan data sebaiknya dituliskan pada model ketimbang langsung pada template untuk memudahkan dalam penambahan dan penghapusan data yang ada di dalamnya. Hal tersebut juga sesuai dengan prinsip Separation of Concerns (SoC), yaitu memisahkan program kedalam beberapa bagian, dan setiap bagian tesebut memiliki tugasnya masing-masing.
+
+Menyimpan data pada model dan memisahkannya dari template sangat membantu dalam pengembangkan dan memelihara web kita. Misalnya ketika ingin menambah data proyek baru pada portfolio, kita cukup menambah data pada database melalui model tanpa perlu mengubah kode HTML sama sekali. Hal ini juga mempersingkat dan menambah readability kode karena kita tidak perlu menuliskan data satu persatu pada template. Tidak hanya itu, menyimpan data pada model juga mempermudah kita jika web kita ingin diintegrasikan dengan platform lain. Data pada model dapat diexport dalam format JSON jika web kita ingin diakses melalui aplikasi mobile.
+
+3. Fungsi makeimigrations berfungsi untuk membuat file blueprint untuk perubahan database yang kita lakukan. Sedangkan fungsi migrate berfungsi untuk mengeksekusi dan melakukan perubahan pada database sesuai dengan file tersebut, bisa berupa penambahan maupun penghapusan. 
+
+Kedua fungsi tersebut tidak wajib untuk dijalankan secara bersamaan, tergantung dengan kondisi yang ingin kita lakukan. Misalkan jika kita ingin menambah suatu field baru pada model, kita harus menjalakan fungsi makeimigrations untuk merekam perubahan lalu menjalankan fungsi migrate agar field baru tersebut dapat benar-benar ditambahkan pada database.
+
+AI Disclosure:
+Saya menggunakan AI dengan model Gemini 3.8 Flash dan Claude Sonnet 5 untuk membantu saya dalam pengerjaan Tugas Individu 2. 
+Penggunaan AI yang saya lakukan kebanyakan untuk membantu saya dalam mengatur desain, seperti cara memindahkan dan mengubah posisi objek.
+Saya juga menggunakan AI untuk membantu saya untuk lebih mengerti mengenai syntax CSS.
+Strategi saya dalam melakukan prompting adalah dengan menanyakan pertanyaan saya lalu mengkonfirmasi pemahaman saya kembali pada AI tersebut. 
+
+Chat log:
+https://claude.ai/share/376c9a5e-2edd-401e-b1fe-70eca23b3dac
+https://share.gemini.google/XP0GkGhm3LFB
+https://share.gemini.google/gOkQZTMmPLcz
