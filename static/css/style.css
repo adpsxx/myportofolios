@@ -21,11 +21,46 @@ body {
     color: var(--ink);
     background-color: var(--paper);
     line-height: 1.6;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 
-/*Background color for footer*/
-.site-footer {
+main {
+    flex: 1;
+}
+
+/* Navbar CSS styles */
+#navbar {
+    background-color: var(--footer-header) !important;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+#navbar .navbar-brand{
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+#navbar .navbar-link{
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/*Footer CSS style*/
+#footer {
+    padding: 1.5rem;
+    color: var(--text-muted);
     background-color: var(--footer-header);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+    bottom: 0;
+    width: 100%;
 }
 
 /*Font for name*/
@@ -158,13 +193,6 @@ h1 {
     border: 3px solid var(--ink);
 }
 
-.site-footer {
-    padding: 1.5rem;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--line);
-}
-
 .skill-text {
     font-weight: bold;
     font-size: 0.85rem;
@@ -180,24 +208,6 @@ h1 {
     font-size: 0.9rem;
     line-height: 1.5;
     color: var(--ink);
-}
-
-/* Navbar CSS styles */
-#navbar {
-  background-color: var(--footer-header) !important;
-}
-
-#navbar .navbar-brand{
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--ink);
-}
-
-#navbar .navbar-link{
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
 }
 
 /* experience CSS styles*/
