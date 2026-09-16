@@ -7,7 +7,7 @@
 /*Color and theme for website*/
 :root {
     --ink: #1c1917;
-    --footer-header: #E5DED4;
+    --footer-header: rgba(229, 222, 212, 0.4);
     --paper: #faf6f0;
     --accent: #c51212;
     --accent-dark: #3021b9;
@@ -33,9 +33,13 @@ main {
 /* Navbar CSS styles */
 #navbar {
     background-color: var(--footer-header) !important;
+    backdrop-filter: blur(10px);
     position: sticky;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 1300px;
+    border-radius: 50px;
     top: 0;
-    width: 100%;
     z-index: 10;
 }
 
@@ -52,13 +56,18 @@ main {
     font-weight: 500;
 }
 
+#navbar .navbar-toggler {
+    border: 0;
+    box-shadow: none;
+}
+
 /*Footer CSS style*/
 #footer {
     padding: 1.5rem;
     color: var(--text-muted);
     background-color: var(--footer-header);
+    backdrop-filter: blur(10px);
     font-size: 0.85rem;
-    border-top: 1px solid var(--line);
     bottom: 0;
     width: 100%;
 }
@@ -77,7 +86,7 @@ h1 {
 
 /*Main Section*/
 .hero {
-    padding: 4.5rem 0 5rem;
+    padding: 0.8rem 1.5rem 5rem;
 }
 
 .hero-grid {
@@ -213,8 +222,7 @@ h1 {
 /* experience CSS styles*/
 /* Section */
 .experience-section {
-    padding: 4rem 0;
-    border-top: 1px solid var(--line);
+    padding: 0.8rem 1.5rem 5rem;
 }
 
 .section-kicker {
@@ -329,8 +337,7 @@ h1 {
 
 /*Wrapping container for project*/
 .project-section {
-    padding: 4rem 0;
-    border-top: 1px solid var(--line);
+    padding: 0.8rem 1.5rem 5rem;
 }
 
 /*Styling image inside card for each project*/
