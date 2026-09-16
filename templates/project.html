@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% extends 'base.html' %}
-  {% block content %}
+{% extends "base.html" %}
+{% block meta %}
+    <title>Project - {{ name }}</title>
+{% endblock meta %}
+{% block content %}
     <main>
         <section class="project-section" id="project">
             <div class="container container-project">
@@ -27,5 +30,5 @@
             </div>
         </section>
     </main>
-  {% endblock content %}
+{% endblock content %}
 </html>                               

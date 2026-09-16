@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% extends 'base.html' %}
-  {% block content %}
+{% extends 'base.html' %}
+{% block meta %}
+    <title>Portofolio - {{ name }}</title>
+{% endblock meta %}
+{% block content %}
     <main>
         <section class="hero" id="profile">
             <div class="container hero-grid">
@@ -42,5 +45,5 @@
             </div>
         </section>
     </main>
-  {% endblock content %}
+{% endblock content %}
 </html>
