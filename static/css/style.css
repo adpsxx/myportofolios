@@ -505,6 +505,33 @@ h1 {
     margin-top: 1.5rem;
 }
 
+/*CSS FOR PROJECT SEARCH*/
+.project-search {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-search .button {
+    background-color: #0a66c2;
+}
+
+.project-search__input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+}
+
+.project-search__input:focus {
+    outline: 2px solid var(--accent);
+    border-color: var(--accent);
+}
+
 /*Mobile view*/
 /*Make every element goes to the center*/
 @media (max-width: 600px) {
