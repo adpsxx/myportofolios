@@ -274,11 +274,37 @@ h1 {
 }
 
 /*Project section*/
-/*Project title*/
-.project-section h1 {
+/*Container for project title and add project button*/
+.project-section .project-top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     margin: 0.4rem 0 1.5rem;
-    font-size: 2rem;
-    margin-bottom: 20px;
+}
+
+/*Text*/
+.project-section .project-top-container h1 {
+    margin: 0;
+}
+
+/*Add Project button*/
+.project-section .add-button {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--paper);
+    background-color: green;
+    border-radius: 30px;
+    padding: 0.5rem 1rem;
+}
+
+/*Hover animation for add project button*/
+.project-section .add-button:hover {
+    opacity: 0.9;
 }
 
 /* Grid for project*/
@@ -316,9 +342,26 @@ h1 {
 }
 
 /*Make the link button alawys on the bottom left*/
-.project-section .btn-primary {
+.project-section .card-option {
+    display: flex;
+    flex-direction: row;
     margin-top: auto;
-    align-self: flex-start;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.project-section .btn-link {
+    display: inline-flex;
+    background-color: #0a66c2;
+    color: white;
+    text-decoration: none;
+}
+
+.project-section .btn-project-delete {
+    display: inline-flex;
+    background-color: #c51212;
+    color: white;
 }
 
 /*Hover animaton for project card*/
@@ -441,7 +484,17 @@ h1 {
     }
 
     /*Center the title*/
-    .container-project > p, .container-project > h1 {
+    .container-project > h1 {
         text-align: center;
+    }
+
+    /*Align text to left*/
+    .container-project > p {
+        text-align: left;
+    }
+
+    /*Add boundary for the container*/
+    .container-project {
+        width: 70%;
     }
 }
