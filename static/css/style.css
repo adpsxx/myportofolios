@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html, body {
+    min-width: 380px;
+}
+
 /*Color and theme for website*/
 :root {
     --ink: #1c1917;
@@ -604,6 +608,7 @@ h1 {
 
     /*Add boundary for the container*/
     .container-project {
-        width: 70%;
+        width: 95%;
+        margin-inline: auto;
     }
 }
