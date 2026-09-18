@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/*Minimum screen size*/
 html, body {
     min-width: 380px;
 }

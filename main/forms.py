@@ -1,6 +1,6 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput
+from django.forms import DateTimeInput, ModelForm, Select, TextInput, Textarea, URLInput
 
-from main.models import Project
+from main.models import Project, Experience;
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -40,6 +40,44 @@ class ProjectForm(ModelForm):
             "project_link": URLInput(
                 attrs={
                     "placeholder": "https://github.com/adpsxx",
+                }
+            ),
+        }
+
+class ExperienceForm(ModelForm):
+    class Meta:
+        model = Experience
+        fields = [
+            "title",
+            "description",
+            "category",
+            "ended_at",
+        ]
+
+        labels = {
+            "title": "Nama Experience",
+            "description": "Deskripsi Experience",
+            "category": "Kategori Experience",
+            "ended_at": "Tanggal Selesai Experience",
+        }
+
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "Experience Title",
+                    "maxlength": 255,
+                }
+            ),
+            "description": Textarea(
+                attrs={
+                    "placeholder": "Ceritakan Pengalamanmu",
+                    "rows": 3,
+                }
+            ),
+            "category": Select(),
+            "ended_at": DateTimeInput(
+                attrs={
+                    "placeholder": "Tanggal selesai",
                 }
             ),
         }

@@ -5,7 +5,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from main.forms import ProjectForm
+from main.forms import ExperienceForm, ProjectForm
 from main.models import Experience, Project
 
 
@@ -80,3 +80,18 @@ def get_projects_json(request):
 
     projects_json = serializers.serialize("json", projects)
     return HttpResponse(projects_json, content_type="application/json")
+
+# Menambah/membuat experience
+def create_experience(request):
+    form = ExperienceForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Experience baru berhasil ditambahkan!")
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Burhan",
+        "form": form,
+    }
+    return render(request, "experiences_form.html", context)
