@@ -21,12 +21,14 @@
                             <p class="experience-description">
                                 {{ experience.description }}
                             </p>
-
-                            {% if experience.is_ongoing %}
-                                <p class="experience-status">Sedang berlangsung</p>
-                            {% else %}
-                                <p class="experience-status">Selesai</p>
-                            {% endif %}
+                            <div class="experience-option">
+                                {% if experience.is_ongoing %}
+                                    <p class="experience-status">Sedang berlangsung</p>
+                                {% else %}
+                                    <p class="experience-status">Selesai</p>
+                                {% endif %}
+                                {% include "components/experience_delete_modal.html" with experience=experience %}
+                            </div>
                         </article>
                     {% empty %}
                         <p class="empty-state">
