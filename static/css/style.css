@@ -341,7 +341,7 @@ h1 {
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    gap: 4rem;
 }
 
 /*Formatting project card content using flexbox*/
@@ -383,9 +383,13 @@ h1 {
 /*Project link button*/
 .project-section .btn-link {
     display: inline-flex;
-    background-color: #0a66c2;
+    background-color: #04386d;
     color: white;
     text-decoration: none;
+}
+
+.btn-link:hover {
+    background-color: #0d7be8;
 }
 
 /*Project delete button*/
@@ -393,6 +397,11 @@ h1 {
     display: inline-flex;
     background-color: #c51212;
     color: white;
+}
+
+/*Hover animation for delete button*/
+.button-danger:hover {
+    background-color: darkgray;
 }
 
 /*Hover animaton for project card*/
