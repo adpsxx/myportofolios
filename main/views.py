@@ -48,7 +48,7 @@ def create_project(request):
         return redirect("main:show_project")
 
     context = {
-        "name": "Burhan",
+        "name": "Andranu",
         "form": form,
     }
     return render(request, "projects_form.html", context)
@@ -103,7 +103,7 @@ def create_experience(request):
         return redirect("main:show_experience")
 
     context = {
-        "name": "Burhan",
+        "name": "Andranu",
         "form": form,
     }
     return render(request, "experiences_form.html", context)
