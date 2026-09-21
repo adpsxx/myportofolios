@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/*Minimum screen size*/
 html, body {
     min-width: 380px;
 }
@@ -229,6 +230,34 @@ h1 {
     padding: 0.8rem 1.5rem 5rem;
 }
 
+/*Top section*/
+.experience-section .experience-top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0.4rem 0 1.5rem;
+}
+
+/*Text*/
+.experience-section .experience-top-container h1 {
+    margin: 0;
+}
+
+/*Add Project button*/
+.experience-section .add-button {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--paper);
+    background-color: green;
+    border-radius: 30px;
+    padding: 0.5rem 1rem;
+}
+
 .section-kicker {
     color: var(--accent-dark);
     font-size: 0.8rem;
@@ -254,6 +283,40 @@ h1 {
     background-color: #fff;
     border: 1px solid var(--line);
     border-radius: var(--radius);
+}
+
+/*Experience status and delete option styling*/
+.experience-section .experience-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/*Experience status*/
+.experience-option .experience-status {
+    margin: 0;
+}
+
+/*Admin option (delete, edit)*/
+.experience-option .card-admin-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/*Edit button*/
+.experience-option .button-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Delete button*/
+.experience-option .experience-delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /*Hover animation for experience card*/
@@ -315,7 +378,7 @@ h1 {
 }
 
 /*Hover animation for add project button*/
-.project-section .add-button:hover {
+.add-button:hover {
     opacity: 0.9;
 }
 
@@ -323,7 +386,7 @@ h1 {
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    gap: 4rem;
 }
 
 /*Formatting project card content using flexbox*/
@@ -362,19 +425,37 @@ h1 {
     justify-content: space-between;
 }
 
+/*Admin option (delete, edit)*/
+.project-section .card-admin-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/*Edit button*/
+.project-section .card-admin-option .button-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Delete button*/
+.project-section .card-admin-option .project-delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*Project link button*/
 .project-section .btn-link {
     display: inline-flex;
-    background-color: #0a66c2;
+    background-color: #04386d;
     color: white;
     text-decoration: none;
 }
 
-/*Project delete button*/
-.button-danger {
-    display: inline-flex;
-    background-color: #c51212;
-    color: white;
+.btn-link:hover {
+    background-color: #0d7be8;
 }
 
 /*Hover animaton for project card*/
@@ -383,8 +464,33 @@ h1 {
     transform: scale(1.05);
 }
 
-/*CSS FOR PROJECT FORM*/
-.project-form {
+/*Button*/
+/*delete button*/
+.button-danger {
+    display: inline-flex;
+    background-color: #c51212;
+    color: white;
+}
+
+/*Hover animation for delete button*/
+.button-danger:hover {
+    background-color: darkgray;
+}
+
+/*edit button*/
+.button-edit {
+    display: inline-flex;
+    background-color: #0a66c2;
+    color: white;
+}
+
+.button-edit:hover {
+    background-color: #2e89e5;
+    color: white;
+}
+
+/*CSS FOR FORM*/
+.project-form .experience-form {
     width: 100%;
     max-width: 100%;
     margin-top: 1.5rem;
@@ -444,7 +550,7 @@ h1 {
 }
 
 /*CSS FOR DELETE BUTTON*/
-.project-delete-modal {
+.delete-modal {
     display: none;
     position: fixed;
     inset: 0;
@@ -461,11 +567,11 @@ h1 {
     justify-content: center;
 }
 
-.project-delete-modal:popover-open {
+.delete-modal:popover-open {
     display: flex;
 }
 
-.project-delete-modal__backdrop {
+.delete-modal__backdrop {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -476,7 +582,7 @@ h1 {
     cursor: default;
 }
 
-.project-delete-modal__content {
+.delete-modal__content {
     position: relative;
     z-index: 1;
     width: min(100%, 480px);
@@ -487,7 +593,7 @@ h1 {
     box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
 }
 
-.project-delete-modal__content h2 {
+.delete-modal__content h2 {
     margin: 0 0 0.75rem;
     font-family:
         "Space Grotesk",
@@ -496,7 +602,7 @@ h1 {
     font-size: 1.5rem;
 }
 
-.project-delete-modal__close {
+.delete-modal__close {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -509,7 +615,7 @@ h1 {
     cursor: pointer;
 }
 
-.project-delete-modal__actions {
+.delete-modal__actions {
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
