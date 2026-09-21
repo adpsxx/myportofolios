@@ -4,6 +4,7 @@ Website ini adalah website portfolio personal menggunakan framework Django yang 
 website url: andranu-dhawy-myportofolio.pws.cs.ui.ac.id
 
 # Struktur Program
+```text
 myportofolios/
 ├── manage.py                 
 ├── requirements.txt           
@@ -40,7 +41,8 @@ myportofolios/
 │
 └── static/                   
     ├── css/style.css          
-    └── img/                   
+    └── img/        
+```           
 
 # Setup Instruction
 1. Clone repository Github
