@@ -73,6 +73,26 @@ def get_projects_json(request):
     projects_json = serializers.serialize("json", projects)
     return HttpResponse(projects_json, content_type="application/json")
 
+# Mengedit project
+def edit_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+
+    if request.method == "POST":
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Project berhasil diupdate!")
+            return redirect("main:show_project")
+    else:
+        form = ProjectForm(instance=project)
+
+    context = {
+        "name": "Andranu",
+        "form": form,
+        "project": project,
+    }
+    return render(request, "project_edit_form.html", context)
+
 # Menambah/membuat experience
 def create_experience(request):
     form = ExperienceForm(request.POST or None)
@@ -126,3 +146,23 @@ def delete_experience(request, experience_id):
         messages.success(request, "Experience berhasil dihapus!")
         return redirect("main:show_experience")
     return redirect("main:show_experience")
+
+# Mengedit experience
+def edit_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        form = ExperienceForm(request.POST, instance=experience)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Experience berhasil diupdate!")
+            return redirect("main:show_experience")
+    else:
+        form = ExperienceForm(instance=experience)
+
+    context = {
+        "name": "Andranu",
+        "form": form,
+        "experience": experience
+    }
+    return render(request, "experiences_edit_form.html", context)
