@@ -293,13 +293,30 @@ h1 {
     width: 100%;
 }
 
-.experience-option .experience-status{
+/*Experience status*/
+.experience-option .experience-status {
     margin: 0;
 }
 
+/*Admin option (delete, edit)*/
+.experience-option .card-admin-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/*Edit button*/
+.experience-option .button-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Delete button*/
 .experience-option .experience-delete-button {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 /*Hover animation for experience card*/
@@ -361,7 +378,7 @@ h1 {
 }
 
 /*Hover animation for add project button*/
-.project-section .add-button:hover {
+.add-button:hover {
     opacity: 0.9;
 }
 
@@ -408,8 +425,29 @@ h1 {
     justify-content: space-between;
 }
 
+/*Admin option (delete, edit)*/
+.project-section .card-admin-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/*Edit button*/
+.project-section .card-admin-option .button-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Delete button*/
+.project-section .card-admin-option .project-delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*Project link button*/
-.project-section .btn-link {
+.project-section .card-admin-option .btn-link {
     display: inline-flex;
     background-color: #04386d;
     color: white;
@@ -420,7 +458,14 @@ h1 {
     background-color: #0d7be8;
 }
 
-/*Project delete button*/
+/*Hover animaton for project card*/
+.project-card:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+/*Button*/
+/*delete button*/
 .button-danger {
     display: inline-flex;
     background-color: #c51212;
@@ -432,10 +477,16 @@ h1 {
     background-color: darkgray;
 }
 
-/*Hover animaton for project card*/
-.project-card:hover {
-    opacity: 0.8;
-    transform: scale(1.05);
+/*edit button*/
+.button-edit {
+    display: inline-flex;
+    background-color: #0a66c2;
+    color: white;
+}
+
+.button-edit:hover {
+    background-color: #2e89e5;
+    color: white;
 }
 
 /*CSS FOR FORM*/
