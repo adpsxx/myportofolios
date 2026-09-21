@@ -447,7 +447,7 @@ h1 {
 }
 
 /*Project link button*/
-.project-section .card-admin-option .btn-link {
+.project-section .btn-link {
     display: inline-flex;
     background-color: #04386d;
     color: white;
