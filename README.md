@@ -5,19 +5,19 @@ website url: andranu-dhawy-myportofolio.pws.cs.ui.ac.id
 
 # Struktur Program
 myportofolios/
-├── manage.py                  # Django CLI entry point
+├── manage.py                 
 ├── requirements.txt           
 ├── .env                       
 ├── .env.prod                  
 ├── .gitignore
 │
-├── portofolio/                # Konfigurasi proyek Django
+├── portofolio/                
 │   ├── settings.py            
 │   ├── urls.py                
 │   ├── wsgi.py                
 │   └── asgi.py                
 │
-├── main/                      # Aplikasi utama
+├── main/                      
 │   ├── models.py              
 │   ├── views.py              
 │   ├── urls.py               
@@ -25,7 +25,7 @@ myportofolios/
 │   ├── admin.py               
 │   └── tests.py               
 │
-├── templates/                 # Template HTML
+├── templates/                 
 │   ├── base.html              
 │   ├── index.html            
 │   ├── experience.html        
@@ -38,7 +38,7 @@ myportofolios/
 │       ├── experience_delete_modal.html
 │       └── project_delete_modal.html
 │
-└── static/                     # CSS Style and stored image
+└── static/                   
     ├── css/style.css          
     └── img/                   
 
