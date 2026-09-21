@@ -151,13 +151,19 @@ https://share.gemini.google/gOkQZTMmPLcz
 ### Tugas 3
 #### 1. Jelaskan mengapa kita menggunakan ModelForm pada Django alih-alih membuat form HTML secara manual. Selain itu, jelaskan pula mengapa kita diwajibkan menambahkan {% csrf_token %} pada form tersebut!
 
-    ModelForm digunakan karena dapat menghubungkan form HTML secara langsung dengan Model Django. Dengan ModelForm, kita tidak perlu mendefinisikan setiap field form secara manual karena masing-masing field dapat dibuat berdasarkan field yang sudah ada pada model. Hal tersebut mengurangi jumlah kode, memudahkan penyimpanan data, dan mempermudah validasi data yang dimasukkan.
+    ModelForm digunakan karena dapat menghubungkan form HTML secara langsung dengan Model Django. 
+    Dengan ModelForm, kita tidak perlu mendefinisikan setiap field form secara manual karena masing-masing field dapat dibuat berdasarkan field yang sudah ada pada model. 
+    Hal tersebut mengurangi jumlah kode, memudahkan penyimpanan data, dan mempermudah validasi data yang dimasukkan.
 
-    {% csrf_token %} digunakan untuk menjaga agar form kita tidak diakses oleh pihak asing yang tidak memiliki akses atau yang dinamakan oleh serangan Cross-Site Request Forgery (CSRF). Tanpa adanya {% csrf_token %}, pihak lain dapat mengirim request ke website kita dan memanipulasi atau menghapus data pada website. {% csrf_token %} berperan sebagai validator yang memastikan bahwa setiap request yang diterima website memang berasal dari form yang sah.
+    {% csrf_token %} digunakan untuk menjaga agar form kita tidak diakses oleh pihak asing yang tidak memiliki akses atau yang dinamakan oleh serangan Cross-Site Request Forgery (CSRF). 
+    Tanpa adanya {% csrf_token %}, pihak lain dapat mengirim request ke website kita dan memanipulasi atau menghapus data pada website. 
+    {% csrf_token %} berperan sebagai validator yang memastikan bahwa setiap request yang diterima website memang berasal dari form yang sah.
 
 #### 2. Pada Tutorial 03, kita membahas format data JSON dan XML. Mengapa JSON lebih disukai dalam pengembangan aplikasi web modern dibandingkan XML?
 
-    JSON lebih banyak digunakan pada pengembangan aplikasi web modern karena JSON yang memiliki sintaks yang lebih sederhana sehingga lebih mudah dibaca oleh manusia dan juga diproses oleh program. Struktur data yang digunakan pada JSON juga sudah tersedia pada bahasa pemrograman backend seperti Python (menggunakan dictionary). Sedangkan XML menyimpan semua data sebagai teks murni dan elemen/atribut, sehingga memerlukan langkah konversi tipe data tambahan.
+    JSON lebih banyak digunakan pada pengembangan aplikasi web modern karena JSON yang memiliki sintaks yang lebih sederhana sehingga lebih mudah dibaca oleh manusia dan juga diproses oleh program. 
+    Struktur data yang digunakan pada JSON juga sudah tersedia pada bahasa pemrograman backend seperti Python (menggunakan dictionary). 
+    Sedangkan XML menyimpan semua data sebagai teks murni dan elemen/atribut, sehingga memerlukan langkah konversi tipe data tambahan.
 
 #### 3. Jelaskan alur yang terjadi saat kamu menggunakan fungsi view untuk mengembalikan data portofoliomu dalam bentuk JSON. Mengapa kita perlu melakukan proses serialization pada model Django sebelum datanya dikembalikan?
 
@@ -170,14 +176,16 @@ https://share.gemini.google/gOkQZTMmPLcz
     6. View mengembalikan data yang sudah dalam format JSON tersebut.
     7. Browser menerima data dan menampilkannya.
 
-    Serialization diperlukan karena model Django tidak menggunakan format JSON secara langsung, alih-alih dalam bentuk objek. Serilization bertugas untuk mengkonversi data dari objek menjadi format yang dapat dikirim dan dimengerti oleh client, yaitu JSON. Jika tidak ada serilization, data tidak tersebut menjadi tidak valid karena tidak bisa dibaca oleh server.
+    Serialization diperlukan karena model Django tidak menggunakan format JSON secara langsung, alih-alih dalam bentuk objek. 
+    Serilization bertugas untuk mengkonversi data dari objek menjadi format yang dapat dikirim dan dimengerti oleh client, yaitu JSON. 
+    Jika tidak ada serilization, data tidak tersebut menjadi tidak valid karena tidak bisa dibaca oleh server.
 
-#### AI DISCLOSURE
-Pada tugas individu 3 ini, saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam mengerjakan tugas.
-Penggunaan AI yang saya lakukan kebanyakan untuk membantu dalam menyusun desain dan layout (seperti memindahkan letak objek).
-Saya juga menggunakan AI untuk menanyakan beberapa konsep yang saya kurang pahami mengenai Form dan Data Delivery.
-Dalam penggunaan AI, saya kebanyakan hanya meminta AI untuk meminta cara/contoh dari program, tidak langsung meminta jawaban akhir.  
+#### AI DISCLOSURE (Tugas 3)
+    Pada tugas individu 3 ini, saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam mengerjakan tugas.
+    Penggunaan AI yang saya lakukan kebanyakan untuk membantu dalam menyusun desain dan layout (seperti memindahkan letak objek).
+    Saya juga menggunakan AI untuk menanyakan beberapa konsep yang saya kurang pahami mengenai Form dan Data Delivery.
+    Dalam penggunaan AI, saya kebanyakan hanya meminta AI untuk meminta cara/contoh dari program, tidak langsung meminta jawaban akhir.  
 
-chat log:
-https://share.gemini.google/TqlgE5cWlofv
-https://share.gemini.google/ZqF4iKFeL6f9
+    chat log:
+    https://share.gemini.google/TqlgE5cWlofv
+    https://share.gemini.google/ZqF4iKFeL6f9
