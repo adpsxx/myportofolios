@@ -348,7 +348,9 @@ h1 {
     font-weight: 600;
 }
 
-/*Project section*/
+/*
+    Project section
+*/
 /*Container for project title and add project button*/
 .project-section .project-top-container {
     display: flex;
@@ -425,6 +427,13 @@ h1 {
     justify-content: space-between;
 }
 
+/* User option (link, star) */
+.project-section .card-user-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 /*Admin option (delete, edit)*/
 .project-section .card-admin-option {
     display: flex;
@@ -489,7 +498,50 @@ h1 {
     color: white;
 }
 
-/*CSS FOR FORM*/
+/*Toogle Star Button*/
+.star-form {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.project-section .card-user-option .button-star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    height: 32px;
+    min-height: 0;
+    width: fit-content;
+    padding: 0.2rem 0.45rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+    background-color: #4b5563;
+    color: white;
+}
+
+.button-star.is-starred {
+    background-color: #f59e0b;
+    color: #1c1917;
+}
+
+.button-star:hover {
+    background-color: #d97706;
+}
+
+.star-count {
+    border-radius: 999px;
+    background: rgba(217, 233, 72, 0.25);
+    padding: 0.05rem 0.2rem;
+    font-size: 0.65rem;
+    line-height: 1.1;
+}
+
+/* 
+    FORM
+*/
 .project-form .experience-form {
     width: 100%;
     max-width: 100%;
@@ -549,7 +601,9 @@ h1 {
     background: var(--ink);
 }
 
-/*CSS FOR DELETE BUTTON*/
+/* 
+    DELETE BUTTON
+*/
 .delete-modal {
     display: none;
     position: fixed;
@@ -622,7 +676,9 @@ h1 {
     margin-top: 1.5rem;
 }
 
-/*CSS FOR PROJECT SEARCH*/
+/*
+    PROJECT SEARCH
+*/
 .project-search {
     display: flex;
     gap: 0.75rem;
