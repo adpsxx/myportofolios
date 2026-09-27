@@ -13,6 +13,7 @@ from django.core.exceptions import PermissionDenied
 from main.forms import ExperienceForm, ProjectForm
 from main.models import Experience, Project
 
+# Menampilkan home screen
 def show_main(request):
     last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
     context = {
@@ -28,7 +29,9 @@ def show_main(request):
     }
     return render(request, "index.html", context)
 
+# Menampilkan seluruh projects
 def show_project(request):
+    is_editor = request.user.groups.filter(name="Editor").exists() == True
     json_response = get_projects_json(request)
 
     projects = serializers.deserialize(
@@ -42,12 +45,14 @@ def show_project(request):
         "name": "Andranu",
         "project_list": projects,
         "title_query": title_query,
+        "is_editor": is_editor
     }
     return render(request, "project.html", context)
 
+# Menambah project
 @login_required(login_url="/login/")
 def create_project(request):
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
         raise PermissionDenied
     
     form = ProjectForm(request.POST or None)
@@ -62,9 +67,10 @@ def create_project(request):
     }
     return render(request, "projects_form.html", context)
 
+# Menghapus project
 @login_required(login_url="/login/")
 def delete_project(request, project_id):
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
         raise PermissionDenied
     
     project = get_object_or_404(Project, pk=project_id)
@@ -85,7 +91,10 @@ def get_projects_json(request):
     return HttpResponse(projects_json, content_type="application/json")
 
 # Mengedit project
+@login_required(login_url="/login/")
 def edit_project(request, project_id):
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+        raise PermissionDenied
     project = get_object_or_404(Project, pk=project_id)
 
     if request.method == "POST":
@@ -105,7 +114,10 @@ def edit_project(request, project_id):
     return render(request, "project_edit_form.html", context)
 
 # Menambah/membuat experience
+@login_required(login_url="/login/")
 def create_experience(request):
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+        raise PermissionDenied
     form = ExperienceForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -132,6 +144,7 @@ def get_experience_json(request):
 
 # Menampilkan experience
 def show_experience(request):
+    is_editor = request.user.groups.filter(name="Editor").exists() == True
     json_response = get_experience_json(request)
 
     experiences = serializers.deserialize(
@@ -145,11 +158,16 @@ def show_experience(request):
         "name": "Andranu",
         "experience_list": experiences,
         "title_query": title_query,
+        "is_editor": is_editor
     }
     return render(request, "experience.html", context)
 
 # Menghapus experience
+@login_required(login_url="/login/")
 def delete_experience(request, experience_id):
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+        raise PermissionDenied
+    
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
@@ -159,7 +177,11 @@ def delete_experience(request, experience_id):
     return redirect("main:show_experience")
 
 # Mengedit experience
+@login_required(login_url="/login/")
 def edit_experience(request, experience_id):
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+        raise PermissionDenied
+    
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":

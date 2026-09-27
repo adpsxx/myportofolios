@@ -9,7 +9,9 @@ html, body {
     min-width: 440px;
 }
 
-/*Color and theme for website*/
+/*
+    Color and theme for website
+*/
 :root {
     --ink: #1c1917;
     --footer-header: rgba(229, 222, 212, 0.4);
@@ -35,7 +37,9 @@ main {
     flex: 1;
 }
 
-/* Navbar CSS styles */
+/* 
+    NAVBAR 
+*/
 #navbar {
     background-color: var(--footer-header) !important;
     backdrop-filter: blur(10px);
@@ -55,7 +59,7 @@ main {
     color: var(--ink);
 }
 
-#navbar .navbar-link{
+#navbar .nav-link{
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
@@ -64,6 +68,86 @@ main {
 #navbar .navbar-toggler {
     border: 0;
     box-shadow: none;
+}
+
+#navbar .navbar-nav {
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
+
+#navbar .navigation-items {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+#navbar .user-login-items {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+#navbar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 999px;
+    color: var(--ink);
+}
+
+#navbar .nav-link:hover, #navbar .nav-link:focus-visible {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: var(--accent);
+}
+
+#navbar .user-logout {
+    color: red;
+}
+
+#navbar .user-name {
+    font-weight: bold;
+}
+
+/* Navbar collapse style */
+@media (max-width: 991.98px) {
+    #navbar .navbar {
+        padding: 40px !important;
+    }
+
+    #navbar .container-fluid {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    #navbar .navbar-collapse {
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 12px 28px rgba(28, 25, 23, 0.12);
+    }
+
+    #navbar .navbar-nav, #navbar .navigation-items, #navbar .user-login-items {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #navbar .navigation-items, #navbar .user-login-items {
+        gap: 0.2rem;
+    }
+
+    #navbar .user-login-items {
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--line);
+    }
+
+    #navbar .nav-link {
+        width: 100%;
+    }
 }
 
 /*Footer CSS style*/
@@ -89,7 +173,9 @@ h1 {
     padding: 0 1.5rem;
 }
 
-/*Main Section*/
+/*
+    MAIN PAGE
+*/
 .hero {
     padding: 0.8rem 1.5rem 5rem;
 }
@@ -224,8 +310,9 @@ h1 {
     color: var(--ink);
 }
 
-/* experience CSS styles*/
-/* Section */
+/* 
+    EXPERIENCE 
+*/
 .experience-section {
     padding: 0.8rem 1.5rem 5rem;
 }
@@ -349,7 +436,7 @@ h1 {
 }
 
 /*
-    Project section
+    PROJECT
 */
 /*Container for project title and add project button*/
 .project-section .project-top-container {
@@ -705,7 +792,9 @@ h1 {
     border-color: var(--accent);
 }
 
-/*Mobile view*/
+/*
+    Mobile view
+*/
 /*Make every element goes to the center*/
 @media (max-width: 600px) {
     .hero-grid {
