@@ -31,6 +31,7 @@ def show_main(request):
 
 # Menampilkan seluruh projects
 def show_project(request):
+    is_editor = request.user.groups.filter(name="Editor").exists() == True
     json_response = get_projects_json(request)
 
     projects = serializers.deserialize(
@@ -44,6 +45,7 @@ def show_project(request):
         "name": "Andranu",
         "project_list": projects,
         "title_query": title_query,
+        "is_editor": is_editor
     }
     return render(request, "project.html", context)
 
@@ -142,6 +144,7 @@ def get_experience_json(request):
 
 # Menampilkan experience
 def show_experience(request):
+    is_editor = request.user.groups.filter(name="Editor").exists() == True
     json_response = get_experience_json(request)
 
     experiences = serializers.deserialize(
@@ -155,6 +158,7 @@ def show_experience(request):
         "name": "Andranu",
         "experience_list": experiences,
         "title_query": title_query,
+        "is_editor": is_editor
     }
     return render(request, "experience.html", context)
 
