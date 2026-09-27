@@ -1,5 +1,5 @@
 # Deskripsi
-Website ini adalah website portfolio personal menggunakan framework Django yang menampilkan profil, pengalaman volunteer/organisasi, dan beberapa proyek yang sudah saya buat. Website ini menerapkan model MTV (Model-Template-View) yang memisahkan secara jelas antara pengelolaan data, logika alur aplikasi, dan interface. Selain menerapkan arsitektur MTV, website ini juga mengimplementasikan mekanisme form dan data delivery untuk memfasilitasi interaksi yang lebih efisien.
+Website ini adalah website portfolio personal menggunakan framework Django yang menampilkan profil, pengalaman volunteer/organisasi, dan beberapa proyek yang sudah saya buat. Website ini menerapkan model MTV (Model-Template-View) yang memisahkan secara jelas antara pengelolaan data, logika alur aplikasi, dan interface. Selain menerapkan arsitektur MTV, website ini juga mengimplementasikan mekanisme form dan data delivery untuk memfasilitasi interaksi yang lebih efisien. Autentikasi, session, dan cookie juga ditambahkan untuk mendukung pengelolaan pengguna serta menjaga data dan status pengguna selama berinteraksi dengan website. 
 
 website url: andranu-dhawy-myportofolio.pws.cs.ui.ac.id
 
@@ -11,6 +11,7 @@ myportofolios/
 ├── .env                       
 ├── .env.prod                  
 ├── .gitignore
+├── chat_history.md
 │
 ├── portofolio/                
 │   ├── settings.py            
@@ -35,9 +36,12 @@ myportofolios/
 │   ├── project.html           
 │   ├── projects_form.html     
 │   ├── project_edit_form.html
+|   ├── register.html
+|   ├── login.html
 │   └── components/
 │       ├── experience_delete_modal.html
-│       └── project_delete_modal.html
+│       ├── project_delete_modal.html
+|       └── project_star.html
 │
 └── static/                   
     ├── css/style.css          
@@ -191,3 +195,11 @@ https://share.gemini.google/gOkQZTMmPLcz
     chat log:
     https://share.gemini.google/TqlgE5cWlofv
     https://share.gemini.google/ZqF4iKFeL6f9
+
+### AI Disclosure (Tugas 4)
+    Pada pengerjaan tugas individu 4 ini, saya menggunakan AI bawaan vscode (github copilot).
+    Saya menggunakan AI untuk memperbaiki bagian collapse navbar.
+    Meskipun AI sudah menghasilkan jawaban langsung, saya tetap mengubah sebagian besar kode yang dihasilkan AI tersebut agar sesuai dengan yang saya inginkan.
+
+    chat log:
+    ./chat_history.md
