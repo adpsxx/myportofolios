@@ -9,7 +9,9 @@ html, body {
     min-width: 440px;
 }
 
-/*Color and theme for website*/
+/*
+    Color and theme for website
+*/
 :root {
     --ink: #1c1917;
     --footer-header: rgba(229, 222, 212, 0.4);
@@ -35,7 +37,9 @@ main {
     flex: 1;
 }
 
-/* Navbar CSS styles */
+/* 
+    NAVBAR 
+*/
 #navbar {
     background-color: var(--footer-header) !important;
     backdrop-filter: blur(10px);
@@ -55,7 +59,7 @@ main {
     color: var(--ink);
 }
 
-#navbar .navbar-link{
+#navbar .nav-link{
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
@@ -64,6 +68,31 @@ main {
 #navbar .navbar-toggler {
     border: 0;
     box-shadow: none;
+}
+
+#navbar .navbar-nav {
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
+
+#navbar .navigation-items {
+    display: flex;
+    align-items: center;
+}
+
+#navbar .user-login-items {
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+#navbar .user-logout {
+    color: red;
+}
+
+#navbar .user-name {
+    font-weight: bold;
 }
 
 /*Footer CSS style*/
@@ -89,7 +118,9 @@ h1 {
     padding: 0 1.5rem;
 }
 
-/*Main Section*/
+/*
+    MAIN PAGE
+*/
 .hero {
     padding: 0.8rem 1.5rem 5rem;
 }
@@ -224,8 +255,9 @@ h1 {
     color: var(--ink);
 }
 
-/* experience CSS styles*/
-/* Section */
+/* 
+    EXPERIENCE 
+*/
 .experience-section {
     padding: 0.8rem 1.5rem 5rem;
 }
@@ -349,7 +381,7 @@ h1 {
 }
 
 /*
-    Project section
+    PROJECT
 */
 /*Container for project title and add project button*/
 .project-section .project-top-container {
@@ -705,7 +737,9 @@ h1 {
     border-color: var(--accent);
 }
 
-/*Mobile view*/
+/*
+    Mobile view
+*/
 /*Make every element goes to the center*/
 @media (max-width: 600px) {
     .hero-grid {
