@@ -12,61 +12,277 @@
                 <div class="project-top-container">
                     <h1>Project</h1>
                     {% if user.is_superuser or is_editor %}
-                        <a href="{% url 'main:create_project' %}" class="add-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>Add Project</a>
+                        <button type="button" class="button add-button" popovertarget="add-project-modal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>Add Project</button>
                     {% endif %}
                 </div>
 
-                <form method="get"
-                      action="{% url 'main:show_project' %}"
-                      class="project-search">
+                <form id="project-search-form" class="project-search">
                     <input type="search"
-                           name="title"
-                           value="{{ title_query }}"
-                           placeholder="Cari berdasarkan nama proyek"
-                           class="project-search__input"
-                           aria-label="Cari berdasarkan nama proyek">
+                        id="search-input"
+                        name="title"
+                        value="{{ title_query }}"
+                        placeholder="Cari berdasarkan nama proyek"
+                        class="project-search__input"
+                        aria-label="Cari berdasarkan nama proyek">
                     <button type="submit" class="button">Cari</button>
                 </form>
 
-                <div class="project-grid">
-                    {% for project in project_list %}
-                        <div class="card project-card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ project.thumbnail }}" alt="{{ project.title }} image">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ project.title }}</h5>
-                                <p class="card-text">{{ project.description }}</p>
-                                <div class="card-option">
-                                    <div class="card-user-option">
-                                        <a href="{{ project.project_link }}" class="btn btn-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg></a>
-                                        {% include "components/project_star.html" with project=project %}
-                                    </div>
-                                    {% if user.is_superuser or is_editor %}    
-                                        <div class="card-admin-option">
-                                                <a type="button"
-                                                href="{% url 'main:edit_project' project.id %}"
-                                                class="btn button-edit"
-                                                aria-label="Edit {{ project.title }}"
-                                                title="Edit Project">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-                                                    </svg>
-                                                </a>
-                                                {% include "components/project_delete_modal.html" with project=project %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    {% empty %}
-                        {% if title_query %}
-                            <p class="empty-state">Tidak ada proyek dengan nama tersebut.</p>
-                        {% else %}
-                            <p class="empty-state">Belum ada proyek yang ditambahkan.</p>
-                        {% endif %}
-                    {% endfor %}
+                <!-- Loading State -->
+                <div id="loading" class="empty-state hide">
+                    <p>Memuat projects...</p>
                 </div>
-            </div>
+
+                <!-- Error State -->
+                <div id="error" class="empty-state hide">
+                    <p>Gagal memuat data projects. Silakan coba lagi.</p>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty" class="empty-state hide">
+                    <p>Belum ada proyek yang ditambahkan atau ditemukan.</p>
+                </div>
+
+                <!-- Project Grid -->
+                <div id="grid" class="project-grid hide"></div>
+
         </section>
     </main>
+    {% if user.is_superuser or is_editor %}
+        {% include "components/project_form_modal.html" %}
+    {% endif %}
+
+    <script>
+        // Konfigurasi
+        const BASE_PROJECTS_ENDPOINT = "{% url 'main:get_projects_json' %}";
+        const IS_AUTHORIZE = "{{ user.is_superuser|yesno:'true,false' }}" === "true" || "{{ is_editor|yesno:'true,false' }}" === "true";
+        let projectsAbortController;
+
+        // Elemen DOM
+        const loadingState = document.getElementById('loading');
+        const errorState = document.getElementById('error');
+        const emptyState = document.getElementById('empty');
+        const gridContainer = document.getElementById('grid');
+        const searchForm = document.getElementById('project-search-form');
+        const searchInput = document.getElementById('search-input');
+        const SEARCH_DEBOUNCE_DELAY = 300;
+        let searchDebounceTimer;
+
+        // Menyembunyikan/Menampilkan section halaman
+        function displayPageSection({ showLoading = false, showError = false, showEmpty = false, showGrid = false }) {
+            loadingState.classList.toggle('hide', !showLoading);
+            errorState.classList.toggle('hide', !showError);
+            emptyState.classList.toggle('hide', !showEmpty);
+            gridContainer.classList.toggle('hide', !showGrid);
+        }
+
+        
+        // Mengubah karakter khusus HTML menjadi entity agar ditampilkan sebagai teks
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
+
+        // Membuat elemen card project
+        function buildProjectCardElement(item) {
+            const project = item.fields;
+            const projectId = item.pk;
+
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card project-card';
+            cardDiv.style.width = '18rem';
+
+            // URLs with dummy UUID replacement
+            const deleteUrl = "{% url 'main:delete_project' '00000000-0000-0000-0000-000000000000' %}"
+                .replace('00000000-0000-0000-0000-000000000000', projectId);
+            const starUrl = "{% url 'main:toggle_star' '00000000-0000-0000-0000-000000000000' %}"
+                .replace('00000000-0000-0000-0000-000000000000', projectId);
+            const editUrl = "{% url 'main:edit_project' '00000000-0000-0000-0000-000000000000' %}"
+                .replace('00000000-0000-0000-0000-000000000000', projectId);
+
+            // Star logic
+            const isStarredClass = project.is_starred ? " is-starred" : "";
+            const starSvg = project.is_starred
+                ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>`
+                : `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/></svg>`;
+            const starTitle = project.star_count > 0
+                ? `Dibintangi oleh ${escapeHtml(project.starred_by_names)}`
+                : "Jadilah yang pertama memberi star";
+
+            // Admin buttons (edit + delete) — only for superuser
+            const adminHtml = IS_AUTHORIZE
+                ? `<div class="card-admin-option">
+                        <a type="button"
+                        href="${editUrl}"
+                        class="btn button-edit"
+                        aria-label="Edit ${escapeHtml(project.title)}"
+                        title="Edit Project">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                            </svg>
+                        </a>
+                        <div class="project-delete-button">
+                            <form method="post" action="${deleteUrl}">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="btn button-danger"
+                                        onclick="return confirm('Yakin ingin menghapus project ini?');"
+                                        aria-label="Hapus ${escapeHtml(project.title)}"
+                                        title="Hapus proyek">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
+                                </button>
+                            </form>
+                        </div>
+                </div>`
+                : '';
+
+            cardDiv.innerHTML = `
+                <img class="card-img-top" src="${escapeHtml(project.thumbnail)}" alt="${escapeHtml(project.title)} image">
+                <div class="card-body">
+                    <h5 class="card-title">${escapeHtml(project.title)}</h5>
+                    <p class="card-text">${escapeHtml(project.description)}</p>
+                    <div class="card-option">
+                        <div class="card-user-option">
+                            <a href="${escapeHtml(project.project_link)}" class="btn btn-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>
+                            </a>
+                            <form method="post" action="${starUrl}" class="star-form">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="button button-star${isStarredClass}"
+                                        title="${starTitle}">
+                                    ${starSvg}
+                                    <span class="star-count">${project.star_count}</span>
+                                </button>
+                            </form>
+                        </div>
+                        ${adminHtml}
+                    </div>
+                </div>
+            `;
+            return cardDiv;
+        }
+
+        // Fetch data project
+        async function fetchProjects(searchQuery = "") {
+            if (projectsAbortController) projectsAbortController.abort();
+            projectsAbortController = new AbortController();
+
+            try {
+                displayPageSection({ showLoading: true });
+                
+                const url = searchQuery ? `${BASE_PROJECTS_ENDPOINT}?title=${encodeURIComponent(searchQuery)}` : BASE_PROJECTS_ENDPOINT;
+                
+                const response = await fetch(url, {
+                    headers: { 'Accept': 'application/json' },
+                    signal: projectsAbortController.signal,
+                });
+
+                if (!response.ok) throw new Error('Failed to fetch data');
+
+                const projectData = await response.json();
+
+                if (projectData.length === 0) {
+                    displayPageSection({ showEmpty: true });
+                } else {
+                    gridContainer.innerHTML = '';
+                    projectData.forEach(item => {
+                        gridContainer.appendChild(buildProjectCardElement(item));
+                    });
+                    displayPageSection({ showGrid: true });
+                }
+            } catch (error) {
+                if (error.name === 'AbortError') return;
+                console.error('Error loading projects:', error);
+                displayPageSection({ showError: true });
+            }
+        }
+
+        // Event Handlers untuk Form Search
+        function searchProjects() {
+            fetchProjects(searchInput.value.trim());
+        }
+
+        searchInput.addEventListener("input", function() {
+            clearTimeout(searchDebounceTimer);
+
+            searchDebounceTimer = setTimeout(function() {
+                searchProjects();
+            }, SEARCH_DEBOUNCE_DELAY);
+        });
+
+        searchForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            clearTimeout(searchDebounceTimer);
+            searchProjects();
+        });
+
+        // --- AJAX Form Submission ---
+        const CREATE_PROJECT_ENDPOINT = "{% url 'main:create_project_ajax' %}";
+        const projectForm = document.getElementById('project-form');
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        async function addProject(event) {
+            event.preventDefault();
+
+            const submitButton = projectForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch(CREATE_PROJECT_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                    body: new FormData(projectForm),
+                });
+                const result = await response.json().catch(() => ({}));
+
+                if (response.ok) {
+                    projectForm.reset();
+                    closeProjectModal();
+                    showToast('Berhasil', 'Proyek baru berhasil ditambahkan!', 'success');
+                    fetchProjects(searchInput.value.trim());
+                } else {
+                    const errorMessages = result.errors
+                        ? Object.values(result.errors).flat().map(error => error.message)
+                        : [result.message || `Terjadi kesalahan (status ${response.status}).`];
+                    showToast('Gagal menambahkan proyek', errorMessages.join(' '), 'error');
+                }
+            } catch (error) {
+                console.error('Error adding project:', error);
+                showToast('Gagal menambahkan proyek', 'Tidak dapat terhubung ke server. Silakan coba lagi.', 'error');
+            } finally {
+                submitButton.disabled = false;
+            }
+        }
+
+        if (projectForm) {
+            projectForm.addEventListener('submit', addProject);
+        }
+
+        // --- Close Modal Helper ---
+        function closeProjectModal() {
+            document.getElementById("add-project-modal").hidePopover();
+        }
+
+        // --- Start Application ---
+        fetchProjects(searchInput.value.trim());
+    </script>
 {% endblock content %}
 </html>                               
