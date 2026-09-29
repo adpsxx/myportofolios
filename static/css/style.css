@@ -741,6 +741,8 @@ h1 {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .project-form-modal__content h2 {
