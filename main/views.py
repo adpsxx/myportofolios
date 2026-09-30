@@ -171,24 +171,29 @@ def get_experience_json(request):
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
-    projects_json = serializers.serialize("json", experiences)
-    return HttpResponse(projects_json, content_type="application/json")
+    data = []
+    for experience in experiences:
+        data.append({
+            "model": "main.experience",
+            "pk": str(experience.id),
+            "fields": {
+                "title": experience.title,
+                "description": experience.description,
+                "category": experience.category,
+                "started_at": experience.started_at,
+                "ended_at": experience.ended_at,
+                "status": experience.is_ongoing
+            }
+        })
+    return JsonResponse(data, safe=False)
 
 # Menampilkan experience
 def show_experience(request):
     is_editor = request.user.groups.filter(name="Editor").exists() == True
-    json_response = get_experience_json(request)
-
-    experiences = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    experiences = [experience.object for experience in experiences]
     title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Andranu",
-        "experience_list": experiences,
         "title_query": title_query,
         "is_editor": is_editor
     }
