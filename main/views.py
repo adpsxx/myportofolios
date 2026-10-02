@@ -129,7 +129,7 @@ def edit_project(request, project_id):
 
 @require_POST
 def create_project_ajax(request):
-    if not request.user.is_superuser or request.user.groups.filter(name="Editor").exists():
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
         return JsonResponse(
             {"message": "Hanya pemilik atau editor yang dapat menambahkan proyek."},
             status=403,
@@ -195,9 +195,28 @@ def show_experience(request):
     context = {
         "name": "Andranu",
         "title_query": title_query,
-        "is_editor": is_editor
+        "is_editor": is_editor,
+        "form": ExperienceForm()
     }
     return render(request, "experience.html", context)
+
+@require_POST
+def create_experience_ajax(request):
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+        return JsonResponse(
+            {"message": "Hanya pemilik portofolio atau editor yang dapat menambahkan experience."},
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+    if form.is_valid():
+        experience = form.save()
+        return JsonResponse(
+            {"message": "Experience berhasil ditambahkan.", "pk": str(experience.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
 
 # Menghapus experience
 @login_required(login_url="/login/")
