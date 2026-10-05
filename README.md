@@ -230,9 +230,9 @@ Cross-Site Scripting (XSS) adalah salah satu website vulnerability dimana penyer
 
 Data yang ditampilkan melalui AJAX lebih rentan terhadap serangan XSS dibandingkan pada template Django dikarenakan tidak adanya fitur auto-escaping secara default. Pada template Django, karakter seperti misalnya '<' akan otomatis diubah menjadi '&lt'. Sedangkan, JavaScript tidak mempunyai fitur auto-escaping tersebut sehingga harus dibuat secara manual terlebih dahulu. 
 
-### AI Disclosure (Tugas 4)
-    Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
-    Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
+### AI Disclosure (Tugas 5)
+Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
+Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
 
-    chat log:
-    ./chat_history.md
+chat log:
+./chat_history.md
