@@ -217,3 +217,22 @@ https://share.gemini.google/gOkQZTMmPLcz
 
     chat log:
     ./chat_history.md
+
+### Tugas 5
+#### 1. Jelaskan apa itu debouncing dan mengapa teknik ini penting diterapkan pada fitur pencarian yang menggunakan AJAX!
+Debouncing adalah teknik/metode untuk membatasi jumlah frekuensi HTTP request yang dikirimkan kepada server. Debouncing biasanya diletakkan pada bagian yang meminta banyak input dari pengguna, salah satunya adalah dalam fitur pencarian. Alih-alih memberikan request setiap pengguna mengetik, debouncing men-delay pengiriman request sampai pengguna berhenti mengetik selama beberapa waktu. Waktu tersebut dihitung menggunakan timer dari sejak pengguna berhenti mengetik. Dengan adanya debouncing, server dan website menjadi lebih teroptimisasi dan akan meningkatkan performa karena tidak perlu mengirim request setiap kali adanya perubahan.
+
+### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Pada javascript, fetch() adalah API yang berfungsi untuk membuat HTTP network request secara asinkronus, yaitu request yang berjalan dibelakang tanpa menghentikan website. fetch() mengembalikan sebuah Promise yang nantinya akan menghasilkan Response dari server. Saat kita menggunakan await, eksekusi baris kode pada fungsi async akan menunggu Promise tersebut selesai sebelum lanjut ke baris selanjutnya. Setelah mendapat Response, data dari response tersebut baru dapat diproses pada baris kode berikutnya.
+
+### 3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
+Cross-Site Scripting (XSS) adalah salah satu website vulnerability dimana penyerang berhasil menyuntikkan skrip ke dalam halaman website dan dijalankan oleh browser. Browser tidak dapat membedakan antara skrip sah dan skrip dari penyerang, sehingga skrip dari penyerang tersebut akan dijalankan. Serangan XSS ini cukup berbahaya dikarenakan penyerang dapat membajak sesi pengguna, melakukan phishing, dan mengirimkan request palsu kedalam server.
+
+Data yang ditampilkan melalui AJAX lebih rentan terhadap serangan XSS dibandingkan pada template Django dikarenakan tidak adanya fitur auto-escaping secara default. Pada template Django, karakter seperti misalnya '<' akan otomatis diubah menjadi '&lt'. Sedangkan, JavaScript tidak mempunyai fitur auto-escaping tersebut sehingga harus dibuat secara manual terlebih dahulu. 
+
+### AI Disclosure (Tugas 4)
+    Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
+    Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
+
+    chat log:
+    ./chat_history.md
