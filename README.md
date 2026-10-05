@@ -36,16 +36,23 @@ myportofolios/
 │   ├── project.html           
 │   ├── projects_form.html     
 │   ├── project_edit_form.html
-|   ├── register.html
-|   ├── login.html
+│   ├── register.html
+│   ├── login.html
 │   └── components/
 │       ├── experience_delete_modal.html
+│       ├── experience_form_modal.html
 │       ├── project_delete_modal.html
-|       └── project_star.html
+│       ├── project_form_modal.html
+│       ├── project_star.html
+│       └── toast.html
 │
 └── static/                   
-    ├── css/style.css          
-    └── img/        
+    ├── css/
+    │   └── style.css          
+    ├── js/
+    │   └── toast.js
+    └── img/
+        └── andranu-pic.jpg        
 ```           
 
 # Setup Instruction
@@ -110,6 +117,13 @@ http://127.0.0.1:8000/
 ## Week 3
 - Implementasi Form dan Data Delivery pada website.
 - Menggunakan Form dan Data Delivery untuk menambah, mengedit, dan menghapus data pada model.
+
+### Week 4
+- Implementasi authentication, session, dan cookies.
+
+### Week 5
+- Mengimplementasi javascript.
+- Menerapkan AJAX dan Fetch API
 
 ### Tugas 1
 1. Saya tidak menggunakan elemen semantik HTML5 seperti <section>, <article>, atau <aside> dalam merancang dan membuat website portofolio ini. Berdasarkan sumber yang saya baca di internet, elemen-elemen semantik tersebut digunakan untuk menambah readability kode dan juga menambah aksesibilitas bagi pembaca. Menggunakan atau tidak menggunakan elemen-elemen semantik tersebut tidak akan mengubah fungsionalitas website, karena kita masih bisa meggunakan <div> sebagai penggantinya.
