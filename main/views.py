@@ -129,7 +129,7 @@ def edit_project(request, project_id):
 
 @require_POST
 def create_project_ajax(request):
-    if not request.user.is_superuser or request.user.groups.filter(name="Editor").exists():
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
         return JsonResponse(
             {"message": "Hanya pemilik atau editor yang dapat menambahkan proyek."},
             status=403,
@@ -171,28 +171,52 @@ def get_experience_json(request):
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
-    projects_json = serializers.serialize("json", experiences)
-    return HttpResponse(projects_json, content_type="application/json")
+    data = []
+    for experience in experiences:
+        data.append({
+            "model": "main.experience",
+            "pk": str(experience.id),
+            "fields": {
+                "title": experience.title,
+                "description": experience.description,
+                "category": experience.category,
+                "started_at": experience.started_at,
+                "ended_at": experience.ended_at,
+                "status": experience.is_ongoing
+            }
+        })
+    return JsonResponse(data, safe=False)
 
 # Menampilkan experience
 def show_experience(request):
     is_editor = request.user.groups.filter(name="Editor").exists() == True
-    json_response = get_experience_json(request)
-
-    experiences = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    experiences = [experience.object for experience in experiences]
     title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Andranu",
-        "experience_list": experiences,
         "title_query": title_query,
-        "is_editor": is_editor
+        "is_editor": is_editor,
+        "form": ExperienceForm()
     }
     return render(request, "experience.html", context)
+
+@require_POST
+def create_experience_ajax(request):
+    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+        return JsonResponse(
+            {"message": "Hanya pemilik portofolio atau editor yang dapat menambahkan experience."},
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+    if form.is_valid():
+        experience = form.save()
+        return JsonResponse(
+            {"message": "Experience berhasil ditambahkan.", "pk": str(experience.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
 
 # Menghapus experience
 @login_required(login_url="/login/")

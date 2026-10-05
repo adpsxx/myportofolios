@@ -19,6 +19,7 @@ urlpatterns = [
     path("experience/<uuid:experience_id>/delete/",delete_experience,name="delete_experience"),
     path("experience/<uuid:experience_id>/edit/", edit_experience, name="edit_experience"),
     path("api/experience/", get_experience_json, name="get_experience_json"),
+    path("experience/add-ajax/", create_experience_ajax, name="create_experience_ajax"),
 
     # Login function
     path("register/", register, name="register"),

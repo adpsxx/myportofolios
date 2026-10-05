@@ -36,16 +36,23 @@ myportofolios/
 │   ├── project.html           
 │   ├── projects_form.html     
 │   ├── project_edit_form.html
-|   ├── register.html
-|   ├── login.html
+│   ├── register.html
+│   ├── login.html
 │   └── components/
 │       ├── experience_delete_modal.html
+│       ├── experience_form_modal.html
 │       ├── project_delete_modal.html
-|       └── project_star.html
+│       ├── project_form_modal.html
+│       ├── project_star.html
+│       └── toast.html
 │
 └── static/                   
-    ├── css/style.css          
-    └── img/        
+    ├── css/
+    │   └── style.css          
+    ├── js/
+    │   └── toast.js
+    └── img/
+        └── andranu-pic.jpg        
 ```           
 
 # Setup Instruction
@@ -110,6 +117,13 @@ http://127.0.0.1:8000/
 ## Week 3
 - Implementasi Form dan Data Delivery pada website.
 - Menggunakan Form dan Data Delivery untuk menambah, mengedit, dan menghapus data pada model.
+
+### Week 4
+- Implementasi authentication, session, dan cookies.
+
+### Week 5
+- Mengimplementasi javascript.
+- Menerapkan AJAX dan Fetch API
 
 ### Tugas 1
 1. Saya tidak menggunakan elemen semantik HTML5 seperti <section>, <article>, atau <aside> dalam merancang dan membuat website portofolio ini. Berdasarkan sumber yang saya baca di internet, elemen-elemen semantik tersebut digunakan untuk menambah readability kode dan juga menambah aksesibilitas bagi pembaca. Menggunakan atau tidak menggunakan elemen-elemen semantik tersebut tidak akan mengubah fungsionalitas website, karena kita masih bisa meggunakan <div> sebagai penggantinya.
@@ -200,6 +214,25 @@ https://share.gemini.google/gOkQZTMmPLcz
     Pada pengerjaan tugas individu 4 ini, saya menggunakan AI bawaan vscode (github copilot).
     Saya menggunakan AI untuk memperbaiki bagian collapse navbar.
     Meskipun AI sudah menghasilkan jawaban langsung, saya tetap mengubah sebagian besar kode yang dihasilkan AI tersebut agar sesuai dengan yang saya inginkan.
+
+    chat log:
+    ./chat_history.md
+
+### Tugas 5
+#### 1. Jelaskan apa itu debouncing dan mengapa teknik ini penting diterapkan pada fitur pencarian yang menggunakan AJAX!
+Debouncing adalah teknik/metode untuk membatasi jumlah frekuensi HTTP request yang dikirimkan kepada server. Debouncing biasanya diletakkan pada bagian yang meminta banyak input dari pengguna, salah satunya adalah dalam fitur pencarian. Alih-alih memberikan request setiap pengguna mengetik, debouncing men-delay pengiriman request sampai pengguna berhenti mengetik selama beberapa waktu. Waktu tersebut dihitung menggunakan timer dari sejak pengguna berhenti mengetik. Dengan adanya debouncing, server dan website menjadi lebih teroptimisasi dan akan meningkatkan performa karena tidak perlu mengirim request setiap kali adanya perubahan.
+
+### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Pada javascript, fetch() adalah API yang berfungsi untuk membuat HTTP network request secara asinkronus, yaitu request yang berjalan dibelakang tanpa menghentikan website. fetch() mengembalikan sebuah Promise yang nantinya akan menghasilkan Response dari server. Saat kita menggunakan await, eksekusi baris kode pada fungsi async akan menunggu Promise tersebut selesai sebelum lanjut ke baris selanjutnya. Setelah mendapat Response, data dari response tersebut baru dapat diproses pada baris kode berikutnya.
+
+### 3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
+Cross-Site Scripting (XSS) adalah salah satu website vulnerability dimana penyerang berhasil menyuntikkan skrip ke dalam halaman website dan dijalankan oleh browser. Browser tidak dapat membedakan antara skrip sah dan skrip dari penyerang, sehingga skrip dari penyerang tersebut akan dijalankan. Serangan XSS ini cukup berbahaya dikarenakan penyerang dapat membajak sesi pengguna, melakukan phishing, dan mengirimkan request palsu kedalam server.
+
+Data yang ditampilkan melalui AJAX lebih rentan terhadap serangan XSS dibandingkan pada template Django dikarenakan tidak adanya fitur auto-escaping secara default. Pada template Django, karakter seperti misalnya '<' akan otomatis diubah menjadi '&lt'. Sedangkan, JavaScript tidak mempunyai fitur auto-escaping tersebut sehingga harus dibuat secara manual terlebih dahulu. 
+
+### AI Disclosure (Tugas 4)
+    Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
+    Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
 
     chat log:
     ./chat_history.md
