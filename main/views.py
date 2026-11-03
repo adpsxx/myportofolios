@@ -46,7 +46,7 @@ def show_project(request):
 # Menambah project
 @login_required(login_url="/login/")
 def create_project(request):
-    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+    if not request.user.is_superuser:
         raise PermissionDenied
     
     form = ProjectForm(request.POST or None)
@@ -64,7 +64,7 @@ def create_project(request):
 # Menghapus project
 @login_required(login_url="/login/")
 def delete_project(request, project_id):
-    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+    if not request.user.is_superuser:
         raise PermissionDenied
     
     project = get_object_or_404(Project, pk=project_id)
@@ -129,9 +129,9 @@ def edit_project(request, project_id):
 
 @require_POST
 def create_project_ajax(request):
-    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+    if not request.user.is_superuser:
         return JsonResponse(
-            {"message": "Hanya pemilik atau editor yang dapat menambahkan proyek."},
+            {"message": "Hanya pemilik portofolio yang dapat menambahkan proyek."},
             status=403,
         )
 
@@ -148,7 +148,7 @@ def create_project_ajax(request):
 # Menambah/membuat experience
 @login_required(login_url="/login/")
 def create_experience(request):
-    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+    if not request.user.is_superuser:
         raise PermissionDenied
     form = ExperienceForm(request.POST or None)
 
@@ -202,9 +202,9 @@ def show_experience(request):
 
 @require_POST
 def create_experience_ajax(request):
-    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+    if not request.user.is_superuser:
         return JsonResponse(
-            {"message": "Hanya pemilik portofolio atau editor yang dapat menambahkan experience."},
+            {"message": "Hanya pemilik portofolio yang dapat menambahkan experience."},
             status=403,
         )
 
@@ -221,7 +221,7 @@ def create_experience_ajax(request):
 # Menghapus experience
 @login_required(login_url="/login/")
 def delete_experience(request, experience_id):
-    if not (request.user.is_superuser or request.user.groups.filter(name="Editor").exists()):
+    if not request.user.is_superuser:
         raise PermissionDenied
     
     experience = get_object_or_404(Experience, pk=experience_id)

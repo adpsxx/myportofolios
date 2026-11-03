@@ -11,7 +11,7 @@
                 <p class="section-kicker">Perjalanan saya sejauh ini</p>
                 <div class="experience-top-container">
                     <h1>Experience</h1>
-                    {% if user.is_superuser or is_editor %}
+                    {% if user.is_superuser %}
                         <button type="button" class="button add-button" popovertarget="add-experience-modal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>Add Experience</button>
                     {% endif %}
                 </div>
@@ -36,14 +36,15 @@
             </div>
         </section>
     </main>
-    {% if user.is_superuser or is_editor %}
+    {% if user.is_superuser %}
         {% include "components/experience_form_modal.html" %}
     {% endif %}
 
     <script>
         // Konfigurasi
         const BASE_EXPERIENCE_ENDPOINT = "{% url 'main:get_experience_json' %}";
-        const IS_AUTHORIZE = "{{ user.is_superuser|yesno:'true,false' }}" === "true" || "{{ is_editor|yesno:'true,false' }}" === "true";
+        const IS_SUPERUSER = "{{ user.is_superuser|yesno:'true,false' }}" === "true";
+        const IS_EDITOR = "{{ is_editor|yesno:'true,false' }}" === "true";
         let experienceAbortController;
 
         // Elemen DOM
@@ -87,31 +88,36 @@
             // Status text
             const statusText = experience.status ? "Sedang berlangsung" : "Selesai";
 
-            // Admin buttons (edit + delete) — only for authorized users
-            const adminHtml = IS_AUTHORIZE
-                ? `<div class="card-admin-option">
-                        <a type="button"
-                           href="${editUrl}"
-                           class="btn button-edit"
-                           aria-label="Edit ${escapeHtml(experience.title)}"
-                           title="Edit Experience">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-                            </svg>
-                        </a>
-                        <div class="experience-delete-button">
-                            <form method="post" action="${deleteUrl}">
-                                {% csrf_token %}
-                                <button type="submit"
-                                        class="btn button-danger"
-                                        onclick="return confirm('Yakin ingin menghapus experience ini?');"
-                                        aria-label="Hapus ${escapeHtml(experience.title)}"
-                                        title="Hapus Experience">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
-                                </button>
-                            </form>
-                        </div>
+            // Editor hanya bisa mengedit, superuser bisa mengedit dan menghapus
+            const editButton = (IS_SUPERUSER || IS_EDITOR)
+                ? `<a type="button"
+                       href="${editUrl}"
+                       class="btn button-edit"
+                       aria-label="Edit ${escapeHtml(experience.title)}"
+                       title="Edit Experience">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                        </svg>
+                   </a>`
+                : '';
+
+            const deleteButton = IS_SUPERUSER
+                ? `<div class="experience-delete-button">
+                        <form method="post" action="${deleteUrl}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="btn button-danger"
+                                    onclick="return confirm('Yakin ingin menghapus experience ini?');"
+                                    aria-label="Hapus ${escapeHtml(experience.title)}"
+                                    title="Hapus Experience">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
+                            </button>
+                        </form>
                    </div>`
+                : '';
+
+            const adminHtml = (editButton || deleteButton)
+                ? `<div class="card-admin-option">${editButton}${deleteButton}</div>`
                 : '';
 
             // Card
@@ -132,14 +138,16 @@
         }
 
         // Fetch data experience
-        async function fetchExperiences() {
+        async function fetchExperiences(searchQuery = "") {
             if (experienceAbortController) experienceAbortController.abort();
             experienceAbortController = new AbortController();
 
             try {
                 displayPageSection({ showLoading: true });
-
-                const response = await fetch(BASE_EXPERIENCE_ENDPOINT, {
+                
+                const url = searchQuery ? `${BASE_EXPERIENCE_ENDPOINT}?title=${encodeURIComponent(searchQuery)}` : BASE_EXPERIENCE_ENDPOINT;
+                
+                const response = await fetch(url, {
                     headers: { 'Accept': 'application/json' },
                     signal: experienceAbortController.signal,
                 });
@@ -164,10 +172,10 @@
             }
         }
 
+        // --- AJAX Form Submission ---
         const CREATE_EXPERIENCE_ENDPOINT = "{% url 'main:create_experience_ajax' %}";
         const experienceForm = document.getElementById('experience-form');
 
-        // Membaca nilai cookie, digunakan untuk mengambil token CSRF
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -183,7 +191,6 @@
             return cookieValue;
         }
 
-        // Mengirim data form ke server
         async function addExperience(event) {
             event.preventDefault();
 
@@ -221,10 +228,12 @@
             experienceForm.addEventListener('submit', addExperience);
         }
 
+        // --- Close Modal Helper ---
         function closeExperienceModal() {
             document.getElementById("add-experience-modal").hidePopover();
         }
-        // Start application
+
+        // --- Start Application ---
         fetchExperiences();
     </script>
 {% endblock content %}
