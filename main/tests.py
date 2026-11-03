@@ -45,25 +45,28 @@ class MainTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "experience.html")
-        self.assertContains(response, self.experience.title)
-        self.assertContains(response, self.experience.description)
-        self.assertContains(response, "Fundraising Staff UIGTR 2026")
         self.assertContains(response, f'href="{reverse("main:show_main")}"')
+
+        api_response = self.client.get(reverse("main:get_experience_json"))
+        self.assertEqual(api_response.status_code, 200)
+        experience_data = api_response.json()[0]["fields"]
+        self.assertEqual(experience_data["title"], self.experience.title)
+        self.assertEqual(experience_data["description"], self.experience.description)
 
     def test_empty_experience_page(self):
         Experience.objects.all().delete()
-        response = self.client.get(reverse("main:show_experience"))
+        response = self.client.get(reverse("main:get_experience_json"))
 
-        self.assertContains(response, "Belum ada pengalaman yang ditambahkan.")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), [])
 
     def test_completed_experience(self):
         self.experience.ended_at = timezone.now()
         self.experience.save()
-        response = self.client.get(reverse("main:show_experience"))
+        response = self.client.get(reverse("main:get_experience_json"))
 
         self.assertFalse(self.experience.is_ongoing)
-        self.assertContains(response, "Selesai")
-        self.assertNotContains(response, "Sedang berlangsung")
+        self.assertFalse(response.json()[0]["fields"]["status"])
 
     def test_project_model(self):
         self.assertEqual(str(self.project), "Comchat")
@@ -74,14 +77,18 @@ class MainTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "project.html")
-        self.assertContains(response, self.project.title)
-        self.assertContains(response, self.project.description)
-        self.assertContains(response, "Comchat")
         self.assertContains(response, f'href="{reverse("main:show_main")}"')
         self.assertContains(response, f'href="{reverse("main:show_experience")}"')
 
+        api_response = self.client.get(reverse("api:project-list"))
+        self.assertEqual(api_response.status_code, 200)
+        project_data = api_response.json()[0]
+        self.assertEqual(project_data["title"], self.project.title)
+        self.assertEqual(project_data["description"], self.project.description)
+
     def test_empty_project_page(self):
         Project.objects.all().delete()
-        response = self.client.get(reverse("main:show_project"))
+        response = self.client.get(reverse("api:project-list"))
 
-        self.assertContains(response, "Belum ada projek yang ditambahkan.")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), [])

@@ -21,7 +21,6 @@ class IsPortfolioOwnerOrEditorOrReadOnly(BasePermission):
             return False
         if request.user.is_superuser:
             return True
-        # Editor hanya bisa mengedit (PUT dan PATCH), tidak bisa POST (tambah) atau DELETE (hapus)
         return (
             request.method in ("PUT", "PATCH")
             and request.user.groups.filter(name="Editor").exists()
