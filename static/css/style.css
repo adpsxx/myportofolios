@@ -600,7 +600,8 @@ h1 {
     margin: 0;
 }
 
-.project-section .card-user-option .button-star {
+.project-section .card-user-option .button-star,
+.experience-section .button-star {
     display: inline-flex;
     align-items: center;
     justify-content: center;

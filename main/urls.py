@@ -28,4 +28,5 @@ urlpatterns = [
 
     # Toggle star
     path("projects/<uuid:project_id>/star/", toggle_star, name="toggle_star"),
+    path("experience/<uuid:experience_id>/star/", toggle_star_experience, name="toggle_star_experience"),
 ]
