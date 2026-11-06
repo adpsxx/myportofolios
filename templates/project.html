@@ -191,7 +191,9 @@
             projectsAbortController = new AbortController();
 
             try {
-                displayPageSection({ showLoading: true });
+                if (gridContainer.children.length === 0) {
+                    displayPageSection({ showLoading: true });
+                }
                 const url = new URL(BASE_PROJECTS_ENDPOINT, window.location.origin);
                 if (searchQuery) url.searchParams.set('title', searchQuery);
 

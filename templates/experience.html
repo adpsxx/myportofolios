@@ -184,7 +184,9 @@
             experienceAbortController = new AbortController();
 
             try {
-                displayPageSection({ showLoading: true });
+                if (gridContainer.children.length === 0) {
+                    displayPageSection({ showLoading: true });
+                }
                 const url = new URL(BASE_EXPERIENCE_ENDPOINT, window.location.origin);
                 if (searchQuery) url.searchParams.set('title', searchQuery);
 
