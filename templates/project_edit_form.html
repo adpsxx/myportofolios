@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block meta %}
     <title>Edit Project - {{ name }}</title>
 {% endblock meta %}
@@ -7,9 +8,12 @@
         <section class="project-section">
             <div class="container">
                 <h1>Edit Project</h1>
-                <form method="post"
+                <form id="project-edit-form"
+                      method="post"
                       action="{% url 'main:edit_project' project.id %}"
-                      class="project-form">
+                      data-api-url="{% url 'api:project-detail' project.id %}"
+                      data-redirect-url="{% url 'main:show_project' %}"
+                      class="project-form" novalidate>
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="form-group">
@@ -26,4 +30,5 @@
             </div>
         </section>
     </main>
+    <script src="{% static 'js/project_edit.js' %}"></script>
 {% endblock content %}
