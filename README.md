@@ -237,8 +237,40 @@ Cross-Site Scripting (XSS) adalah salah satu website vulnerability dimana penyer
 Data yang ditampilkan melalui AJAX lebih rentan terhadap serangan XSS dibandingkan pada template Django dikarenakan tidak adanya fitur auto-escaping secara default. Pada template Django, karakter seperti misalnya '<' akan otomatis diubah menjadi '&lt'. Sedangkan, JavaScript tidak mempunyai fitur auto-escaping tersebut sehingga harus dibuat secara manual terlebih dahulu. 
 
 #### AI Disclosure (Tugas 5)
-Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
+Pada pengerjaan tugas individu 5 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
 Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
+
+chat log:
+./chat_history.md
+
+### Tugas 6
+#### 1. Jelaskan apa yang dimaksud dengan REST dan mengapa mengembalikan JSON saja belum cukup untuk menyebut sebuah API sebagai RESTful! Jelaskan pula perbedaan PUT dan PATCH beserta contoh kapan masing-masing sebaiknya digunakan!
+REST (Representational State Transfer) adalah sebuah arsitektur untuk merancang API pada web. REST memungkinkan terjadinya komunikasi antara client dengan server menggunakan HTTP method. Agar sebuah API dapat dikatakan sebagai REST, API tersebut harus memenuhi constraint-constraint berikut: 
+1. Client-Server: Client dan server memiliki tanggung jawab yang terpisah.
+2. Stateless: Setiap request harus memuat informasi yang dibutuhkan server untuk memprosesnya tanpa bergantung pada state dari request sebelumnya.
+3. Uniform Interface: API menggunakan antarmuka yang konsisten, seperti URI untuk mengidentifikasi resource dan HTTP methods untuk menentukan operasi.
+4. Cacheable: Response dapat disimpan dalam cache.
+5. Layered System: Client tidak harus mengetahui apakah komunikasi dilakukan langsung dengan server atau melalui perantara.
+
+API yang mengembalikan JSON belum tentu bisa disebut sebagai RESTful karena bisa saja melanggar satu atau lebih dari ketentuan tersebut.
+
+Perbedaan utama antara PUT dan PATCH terletak pada data yang diperbarui. PUT digunakan untuk mengganti representasi objek secara menyeluruh, sehingga client wajib mengirimkan seluruh field yang dimiliki oleh resource tersebut. Sebaliknya, PATCH digunakan untuk melakukan pembaruan sebagian, di mana client cukup mengirimkan field yang ingin diubah saja dan field lainnya yang tidak dikirim akan tetap mempertahankan nilai sebelumnya.
+
+#### 2. Jelaskan peran serializer pada Django REST Framework! Apa keuntungannya dibandingkan merakit dictionary secara manual dengan JsonResponse seperti pada Tutorial 05?
+Serializer berperan sebagai penghubung antara objek model Django dan data yang dipertukarkan melalui API. Saat menangani request GET, serializer melakukan proses serialization, yaitu mengubah objek model atau queryset menjadi tipe data primitif Python yang siap dirender menjadi JSON. Dibandingkan dengan merakit dictionary secara manual, penggunaan serializer memberikan keuntungan seperti mengurangi duplikasi kode dan membantu validasi karena memiliki built in validator yang otomatis memberikan kode error 400 jika ada yang salah.
+
+#### 3. Jelaskan perbedaan autentikasi dan otorisasi pada Django REST Framework! Mengapa hak akses harus diperiksa dengan permission class di server, bukan hanya dengan menyembunyikan tombol di template?
+Autentikasi adalah proses untuk memverifikasi identitas pengguna yang melakukan request ke API. Tujuannya adalah memastikan siapa pengguna tersebut. Sedangkan, Otorisasi adalah proses untuk menentukan apakah pengguna yang telah terautentikasi memiliki hak akses untuk melakukan suatu tindakan atau mengakses resource tertentu. Hak akses tetap harus diperiksa menggunakan permission class di server karena template hanya mengatur tampilan interface, bukan keamanan API.
+. Meskipun tombol sudah disembunyikan pada interface pengguna, pengguna masih dapat mengirim request secara langsung melalui browser, Postman, atau program lainnya.
+
+#### 4. Jelaskan mengapa permintaan yang mengubah data tetap memerlukan token CSRF ketika API memakai SessionAuthentication! Mengapa test yang memakai force_authenticate tidak cukup untuk membuktikan bahwa perlindungan CSRF berjalan?
+Ketika API menggunakan SessionAuthentication, identitas pengguna dikenali melalui cookie session id yang secara otomatis selalu dikirimkan oleh browser setiap kali ada request. Pengiriman cookie tersebut membuka celah CSRR apabila pengguna sedang login lalu membuka situs berbahaya di tab lain. Situs tersebut dapat memicu browser pengguna untuk mengirimkan request (seperti POST, PUT, PATCH, atau DELETE) ke endpoint API dan browser akan tetap melampirkan cookie sesi pengguna secara otomatis. Oleh sebab itu, DRF tetap mewajibkan pengiriman token CSRF pada setiap request yang mengubah data agar server dapat memverifikasi bahwa permintaan tersebut benar-benar dikirim secara sah.
+
+Pengujian yang menggunakan force_authenticate tidak cukup untuk membuktikan bahwa perlindungan CSRF berjalan karena force_authenticate merupakan metode pintas pada pengujian DRF yang langsung menetapkan request.user di memori tanpa melalui mekanisme sesi login sesungguhnya. Untuk membuktikan bahwa perlindungan CSRF benar-benar aktif dan menolak request yang tidak menyertakan token CSRF, harus menggunakan APIClient(enforce_csrf_checks=True) serta melakukan login sesi menggunakan .login().
+
+#### AI Disclosure (Tugas 6)
+Pada pengerjaan tugas individu 6 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan juga Github copilot dengan model ChatGPT Luna 5.6
+Saya menggunakan AI untuk membantu saya dalam mengimplementasikan beberapa fitur, dan juga menvalidasi kode pengerjaan saya. Dalam melakukan prompting, saya meminta AI untuk menvalidasi setiap pengerjaan saya dan memastikan saya masih mengikuti alur yang diinginkan. Saya juga selalu me-review hasil dari AI sebelum saya implementasikan pada projek saya.
 
 chat log:
 ./chat_history.md
