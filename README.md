@@ -154,7 +154,7 @@ Saat mengubah tampilan dari desktop ke mobile, elemen yang diprioritaskan adalah
 
 Batasan yang saya rasakan pada website statis ini adalah mengubah isi dari website memerlukan waktu dan effort yang lumayan besar. Misalkan saya ingin menambah atau mengubah deskripsi saya, saya harus mengubah kode HTML dan CSS saya, lalu men-deploy-nya ulang. Saya ingin menambahkan fungsionalitas dinamis seperti opsi untuk mengubah isi website saya tanpa harus mengubah kode HTML/CSS dan men-deploy ulang.
 
-### AI Disclosure (Tugas 1)
+#### AI Disclosure (Tugas 1)
 Saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam pengerjaan Tugas Individu 1. 
 Saya menggunakan AI untuk membantu saya dalam mengintegrasikan fitur-fitur bootstrap (seperti icon dan navbar) dan juga untuk memperbaiki beberapa layout/tampilan elemen dari website saya.
 Saya juga menggunakan AI untuk meminta inspirasi untuk desain website saya.
@@ -173,7 +173,7 @@ Menyimpan data pada model dan memisahkannya dari template sangat membantu dalam 
 
 Kedua fungsi tersebut tidak wajib untuk dijalankan secara bersamaan, tergantung dengan kondisi yang ingin kita lakukan. Misalkan jika kita ingin menambah suatu field baru pada model, kita harus menjalakan fungsi makeimigrations untuk merekam perubahan lalu menjalankan fungsi migrate agar field baru tersebut dapat benar-benar ditambahkan pada database.
 
-### AI Disclosure (Tugas 2)
+#### AI Disclosure (Tugas 2)
 Saya menggunakan AI dengan model Gemini 3.8 Flash dan Claude Sonnet 5 untuk membantu saya dalam pengerjaan Tugas Individu 2. 
 Penggunaan AI yang saya lakukan kebanyakan untuk membantu saya dalam mengatur desain, seperti cara memindahkan dan mengubah posisi objek.
 Saya juga menggunakan AI untuk membantu saya untuk lebih mengerti mengenai syntax CSS.
@@ -190,10 +190,10 @@ ModelForm digunakan karena dapat menghubungkan form HTML secara langsung dengan 
 
 {% csrf_token %} digunakan untuk menjaga agar form kita tidak diakses oleh pihak asing yang tidak memiliki akses atau yang dinamakan oleh serangan Cross-Site Request Forgery (CSRF). Tanpa adanya {% csrf_token %}, pihak lain dapat mengirim request ke website kita dan memanipulasi atau menghapus data pada website. {% csrf_token %} berperan sebagai validator yang memastikan bahwa setiap request yang diterima website memang berasal dari form yang sah.
 
-### 2. Pada Tutorial 03, kita membahas format data JSON dan XML. Mengapa JSON lebih disukai dalam pengembangan aplikasi web modern dibandingkan XML?
+#### 2. Pada Tutorial 03, kita membahas format data JSON dan XML. Mengapa JSON lebih disukai dalam pengembangan aplikasi web modern dibandingkan XML?
 JSON lebih banyak digunakan pada pengembangan aplikasi web modern karena JSON yang memiliki sintaks yang lebih sederhana sehingga lebih mudah dibaca oleh manusia dan juga diproses oleh program. Struktur data yang digunakan pada JSON juga sudah tersedia pada bahasa pemrograman backend seperti Python (menggunakan dictionary). Sedangkan XML menyimpan semua data sebagai teks murni dan elemen/atribut, sehingga memerlukan langkah konversi tipe data tambahan.
 
-### 3. Jelaskan alur yang terjadi saat kamu menggunakan fungsi view untuk mengembalikan data portofoliomu dalam bentuk JSON. Mengapa kita perlu melakukan proses serialization pada model Django sebelum datanya dikembalikan?
+#### 3. Jelaskan alur yang terjadi saat kamu menggunakan fungsi view untuk mengembalikan data portofoliomu dalam bentuk JSON. Mengapa kita perlu melakukan proses serialization pada model Django sebelum datanya dikembalikan?
 Saat menggunakan fungsi view untuk mengembalikan data portofolio dalam bentuk JSON, alurnya secara umum adalah:
 1. Browser mengirim request ke URL tertentu
 2. urls.py menerima dan mencocokkan request tersebut dan mengarahkannya ke fungsi view yang sesuai.
@@ -205,7 +205,7 @@ Saat menggunakan fungsi view untuk mengembalikan data portofolio dalam bentuk JS
 
 Serialization diperlukan karena model Django tidak menggunakan format JSON secara langsung, alih-alih dalam bentuk objek. Serilization bertugas untuk mengkonversi data dari objek menjadi format yang dapat dikirim dan dimengerti oleh client, yaitu JSON. Jika tidak ada serilization, data tidak tersebut menjadi tidak valid karena tidak bisa dibaca oleh server.
 
-### AI DISCLOSURE (Tugas 3)
+#### AI Disclosure (Tugas 3)
 Pada tugas individu 3 ini, saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam mengerjakan tugas.
 Penggunaan AI yang saya lakukan kebanyakan untuk membantu dalam menyusun desain dan layout (seperti memindahkan letak objek).
 Saya juga menggunakan AI untuk menanyakan beberapa konsep yang saya kurang pahami mengenai Form dan Data Delivery.
@@ -215,7 +215,8 @@ chat log:
 https://share.gemini.google/TqlgE5cWlofv
 https://share.gemini.google/ZqF4iKFeL6f9
 
-### AI Disclosure (Tugas 4)
+### Tugas 4
+#### AI Disclosure (Tugas 4)
 Pada pengerjaan tugas individu 4 ini, saya menggunakan AI bawaan vscode (github copilot).
 Saya menggunakan AI untuk memperbaiki bagian collapse navbar.
 Meskipun AI sudah menghasilkan jawaban langsung, saya tetap mengubah sebagian besar kode yang dihasilkan AI tersebut agar sesuai dengan yang saya inginkan.
@@ -227,15 +228,15 @@ chat log:
 #### 1. Jelaskan apa itu debouncing dan mengapa teknik ini penting diterapkan pada fitur pencarian yang menggunakan AJAX!
 Debouncing adalah teknik/metode untuk membatasi jumlah frekuensi HTTP request yang dikirimkan kepada server. Debouncing biasanya diletakkan pada bagian yang meminta banyak input dari pengguna, salah satunya adalah dalam fitur pencarian. Alih-alih memberikan request setiap pengguna mengetik, debouncing men-delay pengiriman request sampai pengguna berhenti mengetik selama beberapa waktu. Waktu tersebut dihitung menggunakan timer dari sejak pengguna berhenti mengetik. Dengan adanya debouncing, server dan website menjadi lebih teroptimisasi dan akan meningkatkan performa karena tidak perlu mengirim request setiap kali adanya perubahan.
 
-### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+#### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
 Pada javascript, fetch() adalah API yang berfungsi untuk membuat HTTP network request secara asinkronus, yaitu request yang berjalan dibelakang tanpa menghentikan website. fetch() mengembalikan sebuah Promise yang nantinya akan menghasilkan Response dari server. Saat kita menggunakan await, eksekusi baris kode pada fungsi async akan menunggu Promise tersebut selesai sebelum lanjut ke baris selanjutnya. Setelah mendapat Response, data dari response tersebut baru dapat diproses pada baris kode berikutnya.
 
-### 3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
+#### 3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
 Cross-Site Scripting (XSS) adalah salah satu website vulnerability dimana penyerang berhasil menyuntikkan skrip ke dalam halaman website dan dijalankan oleh browser. Browser tidak dapat membedakan antara skrip sah dan skrip dari penyerang, sehingga skrip dari penyerang tersebut akan dijalankan. Serangan XSS ini cukup berbahaya dikarenakan penyerang dapat membajak sesi pengguna, melakukan phishing, dan mengirimkan request palsu kedalam server.
 
 Data yang ditampilkan melalui AJAX lebih rentan terhadap serangan XSS dibandingkan pada template Django dikarenakan tidak adanya fitur auto-escaping secara default. Pada template Django, karakter seperti misalnya '<' akan otomatis diubah menjadi '&lt'. Sedangkan, JavaScript tidak mempunyai fitur auto-escaping tersebut sehingga harus dibuat secara manual terlebih dahulu. 
 
-### AI Disclosure (Tugas 5)
+#### AI Disclosure (Tugas 5)
 Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
 Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
 
