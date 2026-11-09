@@ -1,40 +1,49 @@
 # Deskripsi
-Website ini adalah website portfolio personal menggunakan framework Django yang menampilkan profil, pengalaman volunteer/organisasi, dan beberapa proyek yang sudah saya buat. Website ini menerapkan model MTV (Model-Template-View) yang memisahkan secara jelas antara pengelolaan data, logika alur aplikasi, dan interface. Selain menerapkan arsitektur MTV, website ini juga mengimplementasikan mekanisme form dan data delivery untuk memfasilitasi interaksi yang lebih efisien. Autentikasi, session, dan cookie juga ditambahkan untuk mendukung pengelolaan pengguna serta menjaga data dan status pengguna selama berinteraksi dengan website. 
+Website ini adalah website portfolio personal menggunakan framework Django yang menampilkan profil, pengalaman volunteer/organisasi, dan beberapa proyek yang sudah saya buat. Website ini menerapkan model MTV (Model-Template-View) yang memisahkan secara jelas antara pengelolaan data, logika alur aplikasi, dan interface. Selain menerapkan arsitektur MTV, website ini juga mengimplementasikan mekanisme form dan data delivery untuk memfasilitasi interaksi yang lebih efisien. Autentikasi, session, dan cookie juga ditambahkan untuk mendukung pengelolaan pengguna serta menjaga data dan status pengguna selama berinteraksi dengan website. Website ini juga telah terintegrasi dengan REST API menggunakan Django REST Framework (DRF) serta memanfaatkan AJAX dan Fetch API pada sisi frontend, sehingga proses pencarian, penambahan, pembaruan, penghapusan data, hingga pemberian star dapat berjalan secara asinkron tanpa perlu memuat ulang halaman.
 
 website url: andranu-dhawy-myportofolio.pws.cs.ui.ac.id
 
 # Struktur Program
 ```text
 myportofolios/
-├── manage.py                 
-├── requirements.txt           
-├── .env                       
-├── .env.prod                  
+├── manage.py
+├── requirements.txt
+├── README.md
 ├── .gitignore
 ├── chat_history.md
 │
-├── portofolio/                
-│   ├── settings.py            
-│   ├── urls.py                
-│   ├── wsgi.py                
-│   └── asgi.py                
+├── portofolio/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── views.py
+│   ├── wsgi.py
+│   └── asgi.py
 │
-├── main/                      
-│   ├── models.py              
-│   ├── views.py              
-│   ├── urls.py               
-│   ├── forms.py              
-│   ├── admin.py               
-│   └── tests.py               
+├── main/
+│   ├── migrations/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── forms.py
+│   ├── serializers.py
+│   ├── permissions.py
+│   ├── views.py
+│   ├── api_views.py
+│   ├── urls.py
+│   ├── api_urls.py
+│   ├── tests.py
+│   └── tests_api.py
 │
-├── templates/                 
-│   ├── base.html              
-│   ├── index.html            
-│   ├── experience.html        
-│   ├── experiences_form.html  
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── experience.html
+│   ├── experiences_form.html
 │   ├── experiences_edit_form.html
-│   ├── project.html           
-│   ├── projects_form.html     
+│   ├── project.html
+│   ├── projects_form.html
 │   ├── project_edit_form.html
 │   ├── register.html
 │   ├── login.html
@@ -46,13 +55,15 @@ myportofolios/
 │       ├── project_star.html
 │       └── toast.html
 │
-└── static/                   
+└── static/
     ├── css/
-    │   └── style.css          
+    │   └── style.css
     ├── js/
-    │   └── toast.js
+    │   ├── toast.js
+    │   ├── experience_edit.js
+    │   └── project_edit.js
     └── img/
-        └── andranu-pic.jpg        
+        └── andranu-pic.jpg       
 ```           
 
 # Setup Instruction
@@ -124,6 +135,11 @@ http://127.0.0.1:8000/
 ### Week 5
 - Mengimplementasi javascript.
 - Menerapkan AJAX dan Fetch API
+
+### Week 6
+- Mengimplementasikan REST API menggunakan Django REST Framework (DRF) lengkap dengan Serializer dan Permission.
+- Mengintegrasikan fitur CRUD, pencarian, dan star pada halaman Project dan Experience ke endpoint API.
+- Membuat unit test API.
 
 ### Tugas 1
 1. Saya tidak menggunakan elemen semantik HTML5 seperti <section>, <article>, atau <aside> dalam merancang dan membuat website portofolio ini. Berdasarkan sumber yang saya baca di internet, elemen-elemen semantik tersebut digunakan untuk menambah readability kode dan juga menambah aksesibilitas bagi pembaca. Menggunakan atau tidak menggunakan elemen-elemen semantik tersebut tidak akan mengubah fungsionalitas website, karena kita masih bisa meggunakan <div> sebagai penggantinya.
