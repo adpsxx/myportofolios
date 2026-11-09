@@ -1,40 +1,49 @@
 # Deskripsi
-Website ini adalah website portfolio personal menggunakan framework Django yang menampilkan profil, pengalaman volunteer/organisasi, dan beberapa proyek yang sudah saya buat. Website ini menerapkan model MTV (Model-Template-View) yang memisahkan secara jelas antara pengelolaan data, logika alur aplikasi, dan interface. Selain menerapkan arsitektur MTV, website ini juga mengimplementasikan mekanisme form dan data delivery untuk memfasilitasi interaksi yang lebih efisien. Autentikasi, session, dan cookie juga ditambahkan untuk mendukung pengelolaan pengguna serta menjaga data dan status pengguna selama berinteraksi dengan website. 
+Website ini adalah website portfolio personal menggunakan framework Django yang menampilkan profil, pengalaman volunteer/organisasi, dan beberapa proyek yang sudah saya buat. Website ini menerapkan model MTV (Model-Template-View) yang memisahkan secara jelas antara pengelolaan data, logika alur aplikasi, dan interface. Selain menerapkan arsitektur MTV, website ini juga mengimplementasikan mekanisme form dan data delivery untuk memfasilitasi interaksi yang lebih efisien. Autentikasi, session, dan cookie juga ditambahkan untuk mendukung pengelolaan pengguna serta menjaga data dan status pengguna selama berinteraksi dengan website. Website ini juga telah terintegrasi dengan REST API menggunakan Django REST Framework (DRF) serta memanfaatkan AJAX dan Fetch API pada sisi frontend, sehingga proses pencarian, penambahan, pembaruan, penghapusan data, hingga pemberian star dapat berjalan secara asinkron tanpa perlu memuat ulang halaman.
 
 website url: andranu-dhawy-myportofolio.pws.cs.ui.ac.id
 
 # Struktur Program
 ```text
 myportofolios/
-├── manage.py                 
-├── requirements.txt           
-├── .env                       
-├── .env.prod                  
+├── manage.py
+├── requirements.txt
+├── README.md
 ├── .gitignore
 ├── chat_history.md
 │
-├── portofolio/                
-│   ├── settings.py            
-│   ├── urls.py                
-│   ├── wsgi.py                
-│   └── asgi.py                
+├── portofolio/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── views.py
+│   ├── wsgi.py
+│   └── asgi.py
 │
-├── main/                      
-│   ├── models.py              
-│   ├── views.py              
-│   ├── urls.py               
-│   ├── forms.py              
-│   ├── admin.py               
-│   └── tests.py               
+├── main/
+│   ├── migrations/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── forms.py
+│   ├── serializers.py
+│   ├── permissions.py
+│   ├── views.py
+│   ├── api_views.py
+│   ├── urls.py
+│   ├── api_urls.py
+│   ├── tests.py
+│   └── tests_api.py
 │
-├── templates/                 
-│   ├── base.html              
-│   ├── index.html            
-│   ├── experience.html        
-│   ├── experiences_form.html  
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── experience.html
+│   ├── experiences_form.html
 │   ├── experiences_edit_form.html
-│   ├── project.html           
-│   ├── projects_form.html     
+│   ├── project.html
+│   ├── projects_form.html
 │   ├── project_edit_form.html
 │   ├── register.html
 │   ├── login.html
@@ -46,14 +55,16 @@ myportofolios/
 │       ├── project_star.html
 │       └── toast.html
 │
-└── static/                   
+└── static/
     ├── css/
-    │   └── style.css          
+    │   └── style.css
     ├── js/
-    │   └── toast.js
+    │   ├── toast.js
+    │   ├── experience_edit.js
+    │   └── project_edit.js
     └── img/
-        └── andranu-pic.jpg        
-```           
+        └── andranu-pic.jpg
+```
 
 # Setup Instruction
 1. Clone repository Github
@@ -100,21 +111,21 @@ python manage.py runserver
 http://127.0.0.1:8000/
 
 # Weekly Progress
-## Week 0
+### Week 0
 - Setup git repositori dan instalasi Django.
 
-## Week 1
+### Week 1
 - Inisiasi projek awal.
 - Merancang halaman utama website menggunakan HTML dan CSS.
 - Menggunakan bootstrap sebagai navbar.
 - Deploy website ke PWS.
 
-## Week 2
+### Week 2
 - Implementasi MVT (Mode-View-Template) website.
 - Membuat model untuk "Experience" dan "Project".
 - Membuat masing-masing page untuk menampilkan "Experience" dan "Project".
 
-## Week 3
+### Week 3
 - Implementasi Form dan Data Delivery pada website.
 - Menggunakan Form dan Data Delivery untuk menambah, mengedit, dan menghapus data pada model.
 
@@ -124,6 +135,11 @@ http://127.0.0.1:8000/
 ### Week 5
 - Mengimplementasi javascript.
 - Menerapkan AJAX dan Fetch API
+
+### Week 6
+- Mengimplementasikan REST API menggunakan Django REST Framework (DRF) lengkap dengan Serializer dan Permission.
+- Mengintegrasikan fitur CRUD, pencarian, dan star pada halaman Project dan Experience ke endpoint API.
+- Membuat unit test API.
 
 ### Tugas 1
 1. Saya tidak menggunakan elemen semantik HTML5 seperti <section>, <article>, atau <aside> dalam merancang dan membuat website portofolio ini. Berdasarkan sumber yang saya baca di internet, elemen-elemen semantik tersebut digunakan untuk menambah readability kode dan juga menambah aksesibilitas bagi pembaca. Menggunakan atau tidak menggunakan elemen-elemen semantik tersebut tidak akan mengubah fungsionalitas website, karena kita masih bisa meggunakan <div> sebagai penggantinya.
@@ -138,7 +154,7 @@ Saat mengubah tampilan dari desktop ke mobile, elemen yang diprioritaskan adalah
 
 Batasan yang saya rasakan pada website statis ini adalah mengubah isi dari website memerlukan waktu dan effort yang lumayan besar. Misalkan saya ingin menambah atau mengubah deskripsi saya, saya harus mengubah kode HTML dan CSS saya, lalu men-deploy-nya ulang. Saya ingin menambahkan fungsionalitas dinamis seperti opsi untuk mengubah isi website saya tanpa harus mengubah kode HTML/CSS dan men-deploy ulang.
 
-AI Disclosure:
+#### AI Disclosure (Tugas 1)
 Saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam pengerjaan Tugas Individu 1. 
 Saya menggunakan AI untuk membantu saya dalam mengintegrasikan fitur-fitur bootstrap (seperti icon dan navbar) dan juga untuk memperbaiki beberapa layout/tampilan elemen dari website saya.
 Saya juga menggunakan AI untuk meminta inspirasi untuk desain website saya.
@@ -157,7 +173,7 @@ Menyimpan data pada model dan memisahkannya dari template sangat membantu dalam 
 
 Kedua fungsi tersebut tidak wajib untuk dijalankan secara bersamaan, tergantung dengan kondisi yang ingin kita lakukan. Misalkan jika kita ingin menambah suatu field baru pada model, kita harus menjalakan fungsi makeimigrations untuk merekam perubahan lalu menjalankan fungsi migrate agar field baru tersebut dapat benar-benar ditambahkan pada database.
 
-AI Disclosure:
+#### AI Disclosure (Tugas 2)
 Saya menggunakan AI dengan model Gemini 3.8 Flash dan Claude Sonnet 5 untuk membantu saya dalam pengerjaan Tugas Individu 2. 
 Penggunaan AI yang saya lakukan kebanyakan untuk membantu saya dalam mengatur desain, seperti cara memindahkan dan mengubah posisi objek.
 Saya juga menggunakan AI untuk membantu saya untuk lebih mengerti mengenai syntax CSS.
@@ -170,69 +186,91 @@ https://share.gemini.google/gOkQZTMmPLcz
 
 ### Tugas 3
 #### 1. Jelaskan mengapa kita menggunakan ModelForm pada Django alih-alih membuat form HTML secara manual. Selain itu, jelaskan pula mengapa kita diwajibkan menambahkan {% csrf_token %} pada form tersebut!
+ModelForm digunakan karena dapat menghubungkan form HTML secara langsung dengan Model Django. Dengan ModelForm, kita tidak perlu mendefinisikan setiap field form secara manual karena masing-masing field dapat dibuat berdasarkan field yang sudah ada pada model. Hal tersebut mengurangi jumlah kode, memudahkan penyimpanan data, dan mempermudah validasi data yang dimasukkan.
 
-    ModelForm digunakan karena dapat menghubungkan form HTML secara langsung dengan Model Django. 
-    Dengan ModelForm, kita tidak perlu mendefinisikan setiap field form secara manual karena masing-masing field dapat dibuat berdasarkan field yang sudah ada pada model. 
-    Hal tersebut mengurangi jumlah kode, memudahkan penyimpanan data, dan mempermudah validasi data yang dimasukkan.
-
-    {% csrf_token %} digunakan untuk menjaga agar form kita tidak diakses oleh pihak asing yang tidak memiliki akses atau yang dinamakan oleh serangan Cross-Site Request Forgery (CSRF). 
-    Tanpa adanya {% csrf_token %}, pihak lain dapat mengirim request ke website kita dan memanipulasi atau menghapus data pada website. 
-    {% csrf_token %} berperan sebagai validator yang memastikan bahwa setiap request yang diterima website memang berasal dari form yang sah.
+{% csrf_token %} digunakan untuk menjaga agar form kita tidak diakses oleh pihak asing yang tidak memiliki akses atau yang dinamakan oleh serangan Cross-Site Request Forgery (CSRF). Tanpa adanya {% csrf_token %}, pihak lain dapat mengirim request ke website kita dan memanipulasi atau menghapus data pada website. {% csrf_token %} berperan sebagai validator yang memastikan bahwa setiap request yang diterima website memang berasal dari form yang sah.
 
 #### 2. Pada Tutorial 03, kita membahas format data JSON dan XML. Mengapa JSON lebih disukai dalam pengembangan aplikasi web modern dibandingkan XML?
-
-    JSON lebih banyak digunakan pada pengembangan aplikasi web modern karena JSON yang memiliki sintaks yang lebih sederhana sehingga lebih mudah dibaca oleh manusia dan juga diproses oleh program. 
-    Struktur data yang digunakan pada JSON juga sudah tersedia pada bahasa pemrograman backend seperti Python (menggunakan dictionary). 
-    Sedangkan XML menyimpan semua data sebagai teks murni dan elemen/atribut, sehingga memerlukan langkah konversi tipe data tambahan.
+JSON lebih banyak digunakan pada pengembangan aplikasi web modern karena JSON yang memiliki sintaks yang lebih sederhana sehingga lebih mudah dibaca oleh manusia dan juga diproses oleh program. Struktur data yang digunakan pada JSON juga sudah tersedia pada bahasa pemrograman backend seperti Python (menggunakan dictionary). Sedangkan XML menyimpan semua data sebagai teks murni dan elemen/atribut, sehingga memerlukan langkah konversi tipe data tambahan.
 
 #### 3. Jelaskan alur yang terjadi saat kamu menggunakan fungsi view untuk mengembalikan data portofoliomu dalam bentuk JSON. Mengapa kita perlu melakukan proses serialization pada model Django sebelum datanya dikembalikan?
+Saat menggunakan fungsi view untuk mengembalikan data portofolio dalam bentuk JSON, alurnya secara umum adalah:
+1. Browser mengirim request ke URL tertentu
+2. urls.py menerima dan mencocokkan request tersebut dan mengarahkannya ke fungsi view yang sesuai.
+3. View mengambil data dari model.
+4. Data yang diperoleh masih dalam bentuk suatu objek, sehingga belum bisa dikirim.
+5. Dilakukan serialization, yaitu mengubah objek tersebut menjadi format data yang dapat direpresentasikan, yaitu sebagai JSON.
+6. View mengembalikan data yang sudah dalam format JSON tersebut.
+7. Browser menerima data dan menampilkannya.
 
-    Saat menggunakan fungsi view untuk mengembalikan data portofolio dalam bentuk JSON, alurnya secara umum adalah:
-    1. Browser mengirim request ke URL tertentu
-    2. urls.py menerima dan mencocokkan request tersebut dan mengarahkannya ke fungsi view yang sesuai.
-    3. View mengambil data dari model.
-    4. Data yang diperoleh masih dalam bentuk suatu objek, sehingga belum bisa dikirim.
-    5. Dilakukan serialization, yaitu mengubah objek tersebut menjadi format data yang dapat direpresentasikan, yaitu sebagai JSON.
-    6. View mengembalikan data yang sudah dalam format JSON tersebut.
-    7. Browser menerima data dan menampilkannya.
+Serialization diperlukan karena model Django tidak menggunakan format JSON secara langsung, alih-alih dalam bentuk objek. Serilization bertugas untuk mengkonversi data dari objek menjadi format yang dapat dikirim dan dimengerti oleh client, yaitu JSON. Jika tidak ada serilization, data tidak tersebut menjadi tidak valid karena tidak bisa dibaca oleh server.
 
-    Serialization diperlukan karena model Django tidak menggunakan format JSON secara langsung, alih-alih dalam bentuk objek. 
-    Serilization bertugas untuk mengkonversi data dari objek menjadi format yang dapat dikirim dan dimengerti oleh client, yaitu JSON. 
-    Jika tidak ada serilization, data tidak tersebut menjadi tidak valid karena tidak bisa dibaca oleh server.
+#### AI Disclosure (Tugas 3)
+Pada tugas individu 3 ini, saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam mengerjakan tugas.
+Penggunaan AI yang saya lakukan kebanyakan untuk membantu dalam menyusun desain dan layout (seperti memindahkan letak objek).
+Saya juga menggunakan AI untuk menanyakan beberapa konsep yang saya kurang pahami mengenai Form dan Data Delivery.
+Dalam penggunaan AI, saya kebanyakan hanya meminta AI untuk meminta cara/contoh dari program, tidak langsung meminta jawaban akhir.  
 
-#### AI DISCLOSURE (Tugas 3)
-    Pada tugas individu 3 ini, saya menggunakan AI dengan model Gemini 3.8 Flash untuk membantu saya dalam mengerjakan tugas.
-    Penggunaan AI yang saya lakukan kebanyakan untuk membantu dalam menyusun desain dan layout (seperti memindahkan letak objek).
-    Saya juga menggunakan AI untuk menanyakan beberapa konsep yang saya kurang pahami mengenai Form dan Data Delivery.
-    Dalam penggunaan AI, saya kebanyakan hanya meminta AI untuk meminta cara/contoh dari program, tidak langsung meminta jawaban akhir.  
+chat log:
+https://share.gemini.google/TqlgE5cWlofv
+https://share.gemini.google/ZqF4iKFeL6f9
 
-    chat log:
-    https://share.gemini.google/TqlgE5cWlofv
-    https://share.gemini.google/ZqF4iKFeL6f9
+### Tugas 4
+#### AI Disclosure (Tugas 4)
+Pada pengerjaan tugas individu 4 ini, saya menggunakan AI bawaan vscode (github copilot).
+Saya menggunakan AI untuk memperbaiki bagian collapse navbar.
+Meskipun AI sudah menghasilkan jawaban langsung, saya tetap mengubah sebagian besar kode yang dihasilkan AI tersebut agar sesuai dengan yang saya inginkan.
 
-### AI Disclosure (Tugas 4)
-    Pada pengerjaan tugas individu 4 ini, saya menggunakan AI bawaan vscode (github copilot).
-    Saya menggunakan AI untuk memperbaiki bagian collapse navbar.
-    Meskipun AI sudah menghasilkan jawaban langsung, saya tetap mengubah sebagian besar kode yang dihasilkan AI tersebut agar sesuai dengan yang saya inginkan.
-
-    chat log:
-    ./chat_history.md
+chat log:
+./chat_history.md
 
 ### Tugas 5
 #### 1. Jelaskan apa itu debouncing dan mengapa teknik ini penting diterapkan pada fitur pencarian yang menggunakan AJAX!
 Debouncing adalah teknik/metode untuk membatasi jumlah frekuensi HTTP request yang dikirimkan kepada server. Debouncing biasanya diletakkan pada bagian yang meminta banyak input dari pengguna, salah satunya adalah dalam fitur pencarian. Alih-alih memberikan request setiap pengguna mengetik, debouncing men-delay pengiriman request sampai pengguna berhenti mengetik selama beberapa waktu. Waktu tersebut dihitung menggunakan timer dari sejak pengguna berhenti mengetik. Dengan adanya debouncing, server dan website menjadi lebih teroptimisasi dan akan meningkatkan performa karena tidak perlu mengirim request setiap kali adanya perubahan.
 
-### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+#### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
 Pada javascript, fetch() adalah API yang berfungsi untuk membuat HTTP network request secara asinkronus, yaitu request yang berjalan dibelakang tanpa menghentikan website. fetch() mengembalikan sebuah Promise yang nantinya akan menghasilkan Response dari server. Saat kita menggunakan await, eksekusi baris kode pada fungsi async akan menunggu Promise tersebut selesai sebelum lanjut ke baris selanjutnya. Setelah mendapat Response, data dari response tersebut baru dapat diproses pada baris kode berikutnya.
 
-### 3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
+#### 3. Jelaskan apa itu serangan XSS (Cross-Site Scripting) dan mengapa data yang ditampilkan melalui AJAX/JavaScript lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui template Django!
 Cross-Site Scripting (XSS) adalah salah satu website vulnerability dimana penyerang berhasil menyuntikkan skrip ke dalam halaman website dan dijalankan oleh browser. Browser tidak dapat membedakan antara skrip sah dan skrip dari penyerang, sehingga skrip dari penyerang tersebut akan dijalankan. Serangan XSS ini cukup berbahaya dikarenakan penyerang dapat membajak sesi pengguna, melakukan phishing, dan mengirimkan request palsu kedalam server.
 
 Data yang ditampilkan melalui AJAX lebih rentan terhadap serangan XSS dibandingkan pada template Django dikarenakan tidak adanya fitur auto-escaping secara default. Pada template Django, karakter seperti misalnya '<' akan otomatis diubah menjadi '&lt'. Sedangkan, JavaScript tidak mempunyai fitur auto-escaping tersebut sehingga harus dibuat secara manual terlebih dahulu. 
 
-### AI Disclosure (Tugas 5)
-Pada pengerjaan tugas individu 4 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
+#### AI Disclosure (Tugas 5)
+Pada pengerjaan tugas individu 5 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan Claude Opus 5.5
 Saya menggunakan AI untuk membantu saya dalam mengimplementasikan AJAX. Hal tersebut disebabkan kode yang ada pada tutorial dan yang saya buat lumayan berbeda, sehingga saya lumayan kebingungan dalam menggunakannya. 
+
+chat log:
+./chat_history.md
+
+### Tugas 6
+#### 1. Jelaskan apa yang dimaksud dengan REST dan mengapa mengembalikan JSON saja belum cukup untuk menyebut sebuah API sebagai RESTful! Jelaskan pula perbedaan PUT dan PATCH beserta contoh kapan masing-masing sebaiknya digunakan!
+REST (Representational State Transfer) adalah sebuah arsitektur untuk merancang API pada web. REST memungkinkan terjadinya komunikasi antara client dengan server menggunakan HTTP method. Agar sebuah API dapat dikatakan sebagai REST, API tersebut harus memenuhi constraint-constraint berikut: 
+1. Client-Server: Client dan server memiliki tanggung jawab yang terpisah.
+2. Stateless: Setiap request harus memuat informasi yang dibutuhkan server untuk memprosesnya tanpa bergantung pada state dari request sebelumnya.
+3. Uniform Interface: API menggunakan antarmuka yang konsisten, seperti URI untuk mengidentifikasi resource dan HTTP methods untuk menentukan operasi.
+4. Cacheable: Response dapat disimpan dalam cache.
+5. Layered System: Client tidak harus mengetahui apakah komunikasi dilakukan langsung dengan server atau melalui perantara.
+
+API yang mengembalikan JSON belum tentu bisa disebut sebagai RESTful karena bisa saja melanggar satu atau lebih dari ketentuan tersebut.
+
+Perbedaan utama antara PUT dan PATCH terletak pada data yang diperbarui. PUT digunakan untuk mengganti representasi objek secara menyeluruh, sehingga client wajib mengirimkan seluruh field yang dimiliki oleh resource tersebut. Sebaliknya, PATCH digunakan untuk melakukan pembaruan sebagian, di mana client cukup mengirimkan field yang ingin diubah saja dan field lainnya yang tidak dikirim akan tetap mempertahankan nilai sebelumnya.
+
+#### 2. Jelaskan peran serializer pada Django REST Framework! Apa keuntungannya dibandingkan merakit dictionary secara manual dengan JsonResponse seperti pada Tutorial 05?
+Serializer berperan sebagai penghubung antara objek model Django dan data yang dipertukarkan melalui API. Saat menangani request GET, serializer melakukan proses serialization, yaitu mengubah objek model atau queryset menjadi tipe data primitif Python yang siap dirender menjadi JSON. Dibandingkan dengan merakit dictionary secara manual, penggunaan serializer memberikan keuntungan seperti mengurangi duplikasi kode dan membantu validasi karena memiliki built in validator yang otomatis memberikan kode error 400 jika ada yang salah.
+
+#### 3. Jelaskan perbedaan autentikasi dan otorisasi pada Django REST Framework! Mengapa hak akses harus diperiksa dengan permission class di server, bukan hanya dengan menyembunyikan tombol di template?
+Autentikasi adalah proses untuk memverifikasi identitas pengguna yang melakukan request ke API. Tujuannya adalah memastikan siapa pengguna tersebut. Sedangkan, Otorisasi adalah proses untuk menentukan apakah pengguna yang telah terautentikasi memiliki hak akses untuk melakukan suatu tindakan atau mengakses resource tertentu. Hak akses tetap harus diperiksa menggunakan permission class di server karena template hanya mengatur tampilan interface, bukan keamanan API.
+. Meskipun tombol sudah disembunyikan pada interface pengguna, pengguna masih dapat mengirim request secara langsung melalui browser, Postman, atau program lainnya.
+
+#### 4. Jelaskan mengapa permintaan yang mengubah data tetap memerlukan token CSRF ketika API memakai SessionAuthentication! Mengapa test yang memakai force_authenticate tidak cukup untuk membuktikan bahwa perlindungan CSRF berjalan?
+Ketika API menggunakan SessionAuthentication, identitas pengguna dikenali melalui cookie session id yang secara otomatis selalu dikirimkan oleh browser setiap kali ada request. Pengiriman cookie tersebut membuka celah CSRR apabila pengguna sedang login lalu membuka situs berbahaya di tab lain. Situs tersebut dapat memicu browser pengguna untuk mengirimkan request (seperti POST, PUT, PATCH, atau DELETE) ke endpoint API dan browser akan tetap melampirkan cookie sesi pengguna secara otomatis. Oleh sebab itu, DRF tetap mewajibkan pengiriman token CSRF pada setiap request yang mengubah data agar server dapat memverifikasi bahwa permintaan tersebut benar-benar dikirim secara sah.
+
+Pengujian yang menggunakan force_authenticate tidak cukup untuk membuktikan bahwa perlindungan CSRF berjalan karena force_authenticate merupakan metode pintas pada pengujian DRF yang langsung menetapkan request.user di memori tanpa melalui mekanisme sesi login sesungguhnya. Untuk membuktikan bahwa perlindungan CSRF benar-benar aktif dan menolak request yang tidak menyertakan token CSRF, harus menggunakan APIClient(enforce_csrf_checks=True) serta melakukan login sesi menggunakan .login().
+
+#### AI Disclosure (Tugas 6)
+Pada pengerjaan tugas individu 6 ini, saya menggunakan Antigravity dengan menggunakan AI model Gemini 3.8 Flash dan juga Github copilot dengan model ChatGPT Luna 5.6
+Saya menggunakan AI untuk membantu saya dalam mengimplementasikan beberapa fitur, dan juga menvalidasi kode pengerjaan saya. Dalam melakukan prompting, saya meminta AI untuk menvalidasi setiap pengerjaan saya dan memastikan saya masih mengikuti alur yang diinginkan. Saya juga selalu me-review hasil dari AI sebelum saya implementasikan pada projek saya.
 
 chat log:
 ./chat_history.md

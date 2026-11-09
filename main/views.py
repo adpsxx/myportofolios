@@ -166,13 +166,17 @@ def create_experience(request):
 # Menerima experience dalam json
 def get_experience_json(request):
     title_query = request.GET.get("title", "").strip()
-    experiences = Experience.objects.all()
+    experiences = Experience.objects.prefetch_related('starred_by').all()
 
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
     data = []
     for experience in experiences:
+        starred_users = experience.starred_by.all()
+        is_starred = request.user in starred_users if request.user.is_authenticated else False
+        starred_by_names = ", ".join([u.username for u in starred_users])
+
         data.append({
             "model": "main.experience",
             "pk": str(experience.id),
@@ -182,7 +186,10 @@ def get_experience_json(request):
                 "category": experience.category,
                 "started_at": experience.started_at,
                 "ended_at": experience.ended_at,
-                "status": experience.is_ongoing
+                "status": experience.is_ongoing,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
             }
         })
     return JsonResponse(data, safe=False)
@@ -295,7 +302,7 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-# Add star
+# Toggle star for project
 @login_required(login_url="/login/")
 def toggle_star(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
@@ -305,3 +312,14 @@ def toggle_star(request, project_id):
         else:
             project.starred_by.add(request.user)
     return redirect("main:show_project")
+
+# Toggle star for experience
+@login_required(login_url="/login/")
+def toggle_star_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
+    return redirect("main:show_experience")

@@ -600,7 +600,7 @@ h1 {
     margin: 0;
 }
 
-.project-section .card-user-option .button-star {
+.button.button-star {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -617,12 +617,12 @@ h1 {
     color: white;
 }
 
-.button-star.is-starred {
+.button.button-star.is-starred {
     background-color: #f59e0b;
     color: #1c1917;
 }
 
-.button-star:hover {
+.button.button-star:hover {
     background-color: #d97706;
 }
 
