@@ -11,6 +11,11 @@ from main.models import Experience, Project
 from main.permissions import IsPortfolioOwnerOrEditorOrReadOnly
 from main.serializers import ProjectSerializer, ExperienceSerializer
 
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 # PROJECT
 @api_view(["GET", "HEAD", "POST"])
 @authentication_classes([SessionAuthentication])
@@ -117,3 +122,11 @@ def experience_star(request, experience_id):
         experience.starred_by.add(request.user)
     serializer = ExperienceSerializer(experience, context={"request": request})
     return Response(serializer.data)
+
+# LOG OUT
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def api_logout(request):
+    if request.auth is not None:
+        request.auth.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
